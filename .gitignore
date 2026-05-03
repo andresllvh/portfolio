@@ -53,3 +53,9 @@ skills-lock.json
 # editors
 .vscode/
 .idea/
+
+# Raw screenshot source folders (optimised copies live in public/projects/)
+/Revio/
+/Aptia/
+/dianas/
+/gestor_gastos/

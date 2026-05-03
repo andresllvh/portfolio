@@ -51,6 +51,15 @@ const projects: Project[] = [
       es: "Plataforma orientada a negocios locales en España para gestionar sus reseñas de Google Business Profile. El sistema hace polling cada 15 minutos, llama a Claude para generar respuestas alineadas con el tono de marca y las publica automáticamente (o las manda a revisión). Incluye Stripe con suscripciones y Customer Portal, autenticación con Google OAuth + PKCE, alertas por email/SMS para reseñas negativas y un dashboard con métricas.",
       en: "A platform for local businesses in Spain to manage their Google Business Profile reviews. The system polls every 15 minutes, uses Claude to draft replies in the brand's tone and publishes them automatically (or sends them to review). Stripe handles subscriptions and Customer Portal, auth is Google OAuth with PKCE, and negative reviews fire email/SMS alerts. Dashboard with metrics included.",
     },
+    url: "https://revio.desarrollotxema.cloud/",
+    media: [
+      "/projects/revio/landing.png",
+      "/projects/revio/dashboard.png",
+      "/projects/revio/alertas.png",
+      "/projects/revio/analiticas.png",
+      "/projects/revio/negocios.png",
+      "/projects/revio/analiticas-ia.png",
+    ],
     highlights: ["nextdotjs", "tailwindcss", "python", "postgresql"],
     align: "left",
     section: "project1",
@@ -79,6 +88,15 @@ const projects: Project[] = [
       es: "Digitaliza el control APPCC completo de un restaurante: registros de temperatura, trazabilidad, alérgenos y generación asistida por IA de los planes HACCP. Integración con Open Food Facts para importar alérgenos, MFA en la autenticación, multi-idioma con next-intl y pagos por suscripción con Stripe. Backend 100% async con FastAPI + SQLAlchemy y tareas en Celery.",
       en: "Full HACCP digitisation for a restaurant: temperature logs, traceability, allergens, and AI-assisted generation of HACCP plans. Integrates with Open Food Facts for allergens, MFA-protected auth, i18n with next-intl, subscription billing with Stripe. Fully async backend with FastAPI + SQLAlchemy and Celery workers.",
     },
+    url: "https://aptia.desarrollotxema.cloud/",
+    media: [
+      "/projects/aptia/landing.png",
+      "/projects/aptia/panel.png",
+      "/projects/aptia/registros.png",
+      "/projects/aptia/carta-alergenos.png",
+      "/projects/aptia/inspeccion.png",
+      "/projects/aptia/cuestionario.png",
+    ],
     highlights: ["nextdotjs", "tailwindcss", "python", "postgresql", "typescript"],
     badge: { es: "En desarrollo", en: "In progress" },
     align: "right",
@@ -108,6 +126,15 @@ const projects: Project[] = [
       es: "Aplicación Django clásica (MVT) para finanzas personales: categorización de gastos, objetivos de ahorro, importación masiva desde Excel (xlsx/xls) y gráficos con Chart.js. Temas claro/oscuro hechos con CSS puro y sin dependencias frontend. Un proyecto que prioriza simplicidad y robustez: sin frameworks en el cliente, autenticación nativa de Django, base de datos SQLite.",
       en: "Classic Django (MVT) app for personal finance: expense categorisation, savings goals, bulk import from Excel (xlsx/xls) and Chart.js-powered graphs. Light/dark themes in pure CSS with zero frontend dependencies. A project that favours simplicity and robustness: no client framework, Django's built-in auth, SQLite storage.",
     },
+    github: "https://github.com/Txemalon/Gestor-de-gastos-personales",
+    media: [
+      "/projects/gestor-gastos/dashboard.png",
+      "/projects/gestor-gastos/wallets.png",
+      "/projects/gestor-gastos/transacciones.png",
+      "/projects/gestor-gastos/categorias.png",
+      "/projects/gestor-gastos/reportes.png",
+      "/projects/gestor-gastos/inversiones.png",
+    ],
     highlights: ["python", "javascript", "html5", "css"],
     align: "left",
     section: "project3",
@@ -136,7 +163,12 @@ const projects: Project[] = [
       es: "Tienda online completa con catálogo, carrito y checkout con Stripe. NextAuth con Google OAuth y credenciales, rate limiting con Upstash Redis, validación con Zod y un panel de administración separado (AdminJS sobre Express, puerto 3001). Transiciones y microinteracciones con Framer Motion para darle un acabado más premium que una tienda al uso.",
       en: "A full e-commerce with catalogue, cart and Stripe checkout. NextAuth with Google OAuth and credentials, Upstash Redis for rate limiting, Zod validation, and a separate admin panel (AdminJS on Express, port 3001). Framer Motion powers transitions and micro-interactions for a more premium feel than a typical shop.",
     },
+    media: [
+      "/projects/dianas/packs.png",
+      "/projects/dianas/catalogo.png",
+    ],
     highlights: ["nextdotjs", "react", "typescript", "tailwindcss", "postgresql"],
+    badge: { es: "En construcción", en: "Under construction" },
     align: "right",
     section: "project4",
   },
@@ -282,7 +314,9 @@ export default function Home() {
                 style={{ ["--d" as string]: "700ms" }}
               >
                 <a
-                  href="#"
+                  href="/cv.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   data-cursor="hover"
                   data-magnetic
                   className="frost-btn frost-btn--primary"
@@ -322,7 +356,7 @@ export default function Home() {
                   </svg>
                 </a>
                 <a
-                  href="https://linkedin.com/in/txemalon"
+                  href="https://es.linkedin.com/in/jose-mar%C3%ADa-albero-belamendia-b9319a246"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-cursor="hover"
@@ -619,7 +653,7 @@ export default function Home() {
                     {t("contact.github")}
                   </a>
                   <a
-                    href="https://linkedin.com/in/txemalon"
+                    href="https://es.linkedin.com/in/jose-mar%C3%ADa-albero-belamendia-b9319a246"
                     target="_blank"
                     rel="noopener noreferrer"
                     data-cursor="hover"

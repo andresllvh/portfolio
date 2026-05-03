@@ -97,6 +97,7 @@ export default function ProjectModal({ project, onClose }: Props) {
         aria-modal="true"
         aria-labelledby="project-modal-title"
         tabIndex={-1}
+        data-lenis-prevent
       >
         {project && (
           <>
