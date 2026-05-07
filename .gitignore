@@ -59,3 +59,10 @@ skills-lock.json
 /Aptia/
 /dianas/
 /gestor_gastos/
+
+# Raw/draft CV files at root (final copies live in public/)
+cv_opcion_b.pdf
+cv_opcion_b_en.pdf
+
+# Conversation context / personal notes
+CONVERSATION_CONTEXT.txt

@@ -314,7 +314,7 @@ export default function Home() {
                 style={{ ["--d" as string]: "700ms" }}
               >
                 <a
-                  href="/cv.pdf"
+                  href={lang === "en" ? "/cv_en.pdf" : "/cv.pdf"}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-cursor="hover"
