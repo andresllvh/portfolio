@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="hl-fade" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1a1d16" stop-opacity="0"/>
+      <stop offset="0.07" stop-color="#1a1d16" stop-opacity="0.42"/>
+      <stop offset="0.5" stop-color="#1a1d16" stop-opacity="1"/>
+      <stop offset="0.93" stop-color="#1a1d16" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#1a1d16" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hl-fade-soft" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2a2e24" stop-opacity="0"/>
+      <stop offset="0.12" stop-color="#2a2e24" stop-opacity="0.28"/>
+      <stop offset="0.5" stop-color="#2a2e24" stop-opacity="0.62"/>
+      <stop offset="0.88" stop-color="#2a2e24" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#2a2e24" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+    <path d="M-140 64 C 90 18, 260 108, 470 58 C 680 8, 870 96, 1080 50 C 1290 4, 1410 78, 1580 42" stroke="url(#hl-fade)" stroke-width="1.25" opacity="0.88"/>
+    <path d="M-60 118 C 200 74, 390 158, 590 112 C 790 66, 980 148, 1180 102 C 1380 56, 1490 130, 1640 94" stroke="url(#hl-fade)" stroke-width="1.15" opacity="0.82"/>
+    <path d="M-100 172 C 130 128, 330 212, 530 166 C 730 120, 920 202, 1120 156 C 1320 110, 1430 184, 1580 148" stroke="url(#hl-fade)" stroke-width="1.2" opacity="0.86"/>
+    <path d="M-20 226 C 240 182, 430 266, 630 220 C 830 174, 1020 256, 1220 210 C 1420 164, 1520 238, 1680 202" stroke="url(#hl-fade)" stroke-width="1.1" opacity="0.78"/>
+    <path d="M-80 280 C 170 236, 370 320, 570 274 C 770 228, 960 310, 1160 264 C 1360 218, 1460 292, 1620 256" stroke="url(#hl-fade)" stroke-width="1.22" opacity="0.9"/>
+    <path d="M-40 334 C 210 290, 410 374, 610 328 C 810 282, 1000 364, 1200 318 C 1400 272, 1500 346, 1660 310" stroke="url(#hl-fade)" stroke-width="1.12" opacity="0.8"/>
+    <path d="M-120 388 C 110 344, 310 428, 510 382 C 710 336, 900 418, 1100 372 C 1300 326, 1400 400, 1560 364" stroke="url(#hl-fade)" stroke-width="1.28" opacity="0.92"/>
+    <path d="M-20 442 C 250 398, 450 482, 650 436 C 850 390, 1040 472, 1240 426 C 1440 380, 1540 454, 1700 418" stroke="url(#hl-fade)" stroke-width="1.14" opacity="0.84"/>
+    <path d="M-60 496 C 190 452, 390 536, 590 490 C 790 444, 980 526, 1180 480 C 1380 434, 1480 508, 1640 472" stroke="url(#hl-fade)" stroke-width="1.18" opacity="0.87"/>
+    <path d="M-40 550 C 220 506, 420 590, 620 544 C 820 498, 1010 580, 1210 534 C 1410 488, 1510 562, 1670 526" stroke="url(#hl-fade)" stroke-width="1.1" opacity="0.79"/>
+    <path d="M-100 604 C 140 560, 340 644, 540 598 C 740 552, 930 634, 1130 588 C 1330 542, 1430 616, 1590 580" stroke="url(#hl-fade)" stroke-width="1.24" opacity="0.89"/>
+    <path d="M-20 658 C 230 614, 430 698, 630 652 C 830 606, 1020 688, 1220 642 C 1420 596, 1520 670, 1680 634" stroke="url(#hl-fade)" stroke-width="1.12" opacity="0.81"/>
+    <path d="M-80 712 C 180 668, 380 752, 580 706 C 780 660, 970 742, 1170 696 C 1370 650, 1470 724, 1630 688" stroke="url(#hl-fade)" stroke-width="1.2" opacity="0.86"/>
+    <path d="M-40 766 C 210 722, 410 806, 610 760 C 810 714, 1000 796, 1200 750 C 1400 704, 1500 778, 1660 742" stroke="url(#hl-fade)" stroke-width="1.14" opacity="0.83"/>
+    <path d="M-120 820 C 120 776, 320 860, 520 814 C 720 768, 910 850, 1110 804 C 1310 758, 1410 832, 1570 796" stroke="url(#hl-fade)" stroke-width="1.26" opacity="0.9"/>
+    <path d="M-20 874 C 240 830, 440 914, 640 868 C 840 822, 1030 904, 1230 858 C 1430 812, 1530 886, 1690 850" stroke="url(#hl-fade)" stroke-width="1.1" opacity="0.8"/>
+  </g>
+  <g stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" opacity="0.55">
+    <path d="M-80 92 C 260 48, 520 132, 760 86 C 1000 40, 1240 118, 1520 74" stroke="url(#hl-fade-soft)" stroke-width="0.85"/>
+    <path d="M-40 200 C 300 156, 560 240, 800 194 C 1040 148, 1280 226, 1560 182" stroke="url(#hl-fade-soft)" stroke-width="0.8"/>
+    <path d="M-100 308 C 220 264, 480 348, 720 302 C 960 256, 1200 334, 1480 290" stroke="url(#hl-fade-soft)" stroke-width="0.88"/>
+    <path d="M-20 416 C 280 372, 540 456, 780 410 C 1020 364, 1260 442, 1540 398" stroke="url(#hl-fade-soft)" stroke-width="0.82"/>
+    <path d="M-60 524 C 240 480, 500 564, 740 518 C 980 472, 1220 550, 1500 506" stroke="url(#hl-fade-soft)" stroke-width="0.86"/>
+    <path d="M-40 632 C 260 588, 520 672, 760 626 C 1000 580, 1240 658, 1520 614" stroke="url(#hl-fade-soft)" stroke-width="0.8"/>
+    <path d="M-80 740 C 200 696, 460 780, 700 734 C 940 688, 1180 766, 1460 722" stroke="url(#hl-fade-soft)" stroke-width="0.84"/>
+    <path d="M-20 848 C 270 804, 530 888, 770 842 C 1010 796, 1250 874, 1530 830" stroke="url(#hl-fade-soft)" stroke-width="0.82"/>
+  </g>
+</svg>

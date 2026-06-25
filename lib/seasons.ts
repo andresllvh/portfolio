@@ -38,11 +38,11 @@ export const SEASONS: SeasonPalette[] = [
   },
   {
     id: "autumn",
-    label: "Otoño",
-    accent: "#e07230",
-    keyboardBase: "#d4682a",
-    particle: "rgba(255, 190, 140, 0.7)",
-    particleHalo: "rgba(210, 110, 50, 0.25)",
+    label: "Vermelho",
+    accent: "#e02020",
+    keyboardBase: "#c01010",
+    particle: "rgba(255, 120, 120, 0.72)",
+    particleHalo: "rgba(200, 20, 20, 0.22)",
   },
   {
     id: "winter",

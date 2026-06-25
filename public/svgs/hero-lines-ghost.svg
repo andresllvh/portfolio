@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="hlg-fade" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#323628" stop-opacity="0"/>
+      <stop offset="0.1" stop-color="#323628" stop-opacity="0.22"/>
+      <stop offset="0.5" stop-color="#323628" stop-opacity="0.48"/>
+      <stop offset="0.9" stop-color="#323628" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#323628" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" opacity="0.72">
+    <path d="M-160 46 C 70 2, 310 88, 520 40 C 730 -8, 940 82, 1150 36 C 1360 -10, 1460 64, 1620 28" stroke="url(#hlg-fade)" stroke-width="1.05"/>
+    <path d="M-40 145 C 230 101, 470 185, 680 139 C 890 93, 1100 175, 1310 129 C 1520 83, 1600 157, 1760 121" stroke="url(#hlg-fade)" stroke-width="0.95"/>
+    <path d="M-120 244 C 100 200, 340 284, 550 238 C 760 192, 970 274, 1180 228 C 1390 182, 1480 256, 1640 220" stroke="url(#hlg-fade)" stroke-width="1"/>
+    <path d="M-20 343 C 260 299, 500 383, 710 337 C 920 291, 1130 373, 1340 327 C 1550 281, 1630 355, 1790 319" stroke="url(#hlg-fade)" stroke-width="0.92"/>
+    <path d="M-80 442 C 150 398, 390 482, 600 436 C 810 390, 1020 472, 1230 426 C 1440 380, 1520 454, 1680 418" stroke="url(#hlg-fade)" stroke-width="1.02"/>
+    <path d="M-40 541 C 220 497, 460 581, 670 535 C 880 489, 1090 571, 1300 525 C 1510 479, 1590 553, 1750 517" stroke="url(#hlg-fade)" stroke-width="0.94"/>
+    <path d="M-100 640 C 120 596, 360 680, 570 634 C 780 588, 990 670, 1200 624 C 1410 578, 1490 652, 1650 616" stroke="url(#hlg-fade)" stroke-width="1"/>
+    <path d="M-20 739 C 240 695, 480 779, 690 733 C 900 687, 1110 769, 1320 723 C 1530 677, 1610 751, 1770 715" stroke="url(#hlg-fade)" stroke-width="0.92"/>
+    <path d="M-60 838 C 180 794, 420 878, 630 832 C 840 786, 1050 868, 1260 822 C 1470 776, 1550 850, 1710 814" stroke="url(#hlg-fade)" stroke-width="0.98"/>
+  </g>
+</svg>

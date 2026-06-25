@@ -1,167 +1,165 @@
 // Minimal i18n layer: a single dictionary keyed by dot-path, with each leaf
-// carrying both the ES and EN copy. Consumers read via `useLanguage().t()`
-// which resolves the path for the active language. Keeping it flat and
-// co-located (rather than adding a dependency like next-intl) keeps the
-// project tiny and makes the strings easy to audit.
-export type Lang = "es" | "en";
+// carrying both the PT and EN copy. Consumers read via `useLanguage().t()`
+// which resolves the path for the active language.
+export type Lang = "pt" | "en";
 
-export const LANGUAGES: Lang[] = ["es", "en"];
-export const DEFAULT_LANG: Lang = "es";
+export const LANGUAGES: Lang[] = ["pt", "en"];
+export const DEFAULT_LANG: Lang = "pt";
 
 type Leaf = Record<Lang, string>;
 type Node = Leaf | { [key: string]: Node };
 
 function isLeaf(node: Node): node is Leaf {
-  return typeof (node as Leaf).es === "string";
+  return typeof (node as Leaf).pt === "string";
 }
 
 export const DICT = {
   picker: {
-    season: { es: "Estación", en: "Season" },
-    language: { es: "Idioma", en: "Language" },
+    season: { pt: "Estação", en: "Season" },
+    language: { pt: "Idioma", en: "Language" },
   },
   seasons: {
-    spring: { es: "Primavera", en: "Spring" },
-    summer: { es: "Verano", en: "Summer" },
-    autumn: { es: "Otoño", en: "Autumn" },
-    winter: { es: "Invierno", en: "Winter" },
+    spring: { pt: "Primavera", en: "Spring" },
+    summer: { pt: "Verão", en: "Summer" },
+    autumn: { pt: "Outono", en: "Autumn" },
+    winter: { pt: "Inverno", en: "Winter" },
   },
   nav: {
-    aria: { es: "Secciones", en: "Sections" },
-    home: { es: "Inicio", en: "Home" },
-    stack: { es: "Stack", en: "Stack" },
-    experience: { es: "Experiencia", en: "Experience" },
-    project: { es: "Proyecto", en: "Project" },
-    contact: { es: "Contacto", en: "Contact" },
+    aria: { pt: "Seções", en: "Sections" },
+    home: { pt: "Início", en: "Home" },
+    stack: { pt: "Stack", en: "Stack" },
+    experience: { pt: "Experiência", en: "Experience" },
+    project: { pt: "Projeto", en: "Project" },
+    contact: { pt: "Contato", en: "Contact" },
   },
   header: {
     availability: {
-      es: "Open to opportunities",
+      pt: "Aberto a oportunidades",
       en: "Open to opportunities",
     },
   },
   hero: {
-    greeting: { es: "Hola, soy", en: "Hi, I am" },
+    greeting: { pt: "Olá, sou", en: "Hi, I am" },
     roleLine: {
-      es: "Software Engineer & Tech Lead.",
-      en: "Software Engineer & Tech Lead.",
+      pt: "Frontend Developer.",
+      en: "Frontend Developer.",
     },
     tagline: {
-      es: "Especializado en ERPs y aplicaciones full-stack para empresas.",
-      en: "Specialised in ERPs and full-stack apps for businesses.",
+      pt: "Especializado em React, TypeScript e Cloud Computing.",
+      en: "Specialised in React, TypeScript and Cloud Computing.",
     },
-    cv: { es: "Descargar CV", en: "Download CV" },
-    hire: { es: "Contactarme", en: "Contact me" },
-    scroll: { es: "Scroll para explorar", en: "Scroll to explore" },
+    cv: { pt: "Baixar CV", en: "Download CV" },
+    hire: { pt: "Fale comigo", en: "Contact me" },
+    scroll: { pt: "Role para explorar", en: "Scroll to explore" },
     keysHint: {
-      es: "· hover sobre las teclas",
+      pt: "· passe o mouse nas teclas",
       en: "· hover over the keys",
     },
   },
   stack: {
-    title: { es: "Tech Stack", en: "Tech Stack" },
+    title: { pt: "Tech Stack", en: "Tech Stack" },
     hint: {
-      es: "(hint: pasa el ratón por una tecla)",
+      pt: "(dica: passe o mouse em uma tecla)",
       en: "(hint: hover over a key)",
     },
     hintMobile: {
-      es: "Las herramientas con las que construyo.",
+      pt: "As ferramentas com as quais construo.",
       en: "The tools I build with.",
     },
   },
   experience: {
-    title: { es: "Experience", en: "Experience" },
+    title: { pt: "Experiência", en: "Experience" },
     subtitle: {
-      es: "Mi trayectoria profesional.",
+      pt: "Minha trajetória profissional.",
       en: "My professional journey.",
     },
   },
   projects: {
-    kicker: { es: "proyecto", en: "project" },
-    viewMore: { es: "Ver más", en: "View more" },
-    openSite: { es: "Abrir sitio", en: "Visit site" },
-    viewCode: { es: "Ver código", en: "View code" },
-    close: { es: "Cerrar", en: "Close" },
-    stackLabel: { es: "Stack", en: "Stack" },
-    overview: { es: "Resumen", en: "Overview" },
+    kicker: { pt: "projeto", en: "project" },
+    viewMore: { pt: "Ver mais", en: "View more" },
+    openSite: { pt: "Abrir site", en: "Visit site" },
+    viewCode: { pt: "Ver código", en: "View code" },
+    close: { pt: "Fechar", en: "Close" },
+    stackLabel: { pt: "Stack", en: "Stack" },
+    overview: { pt: "Resumo", en: "Overview" },
   },
   contact: {
-    kicker: { es: "contacto", en: "contact" },
-    title: { es: "¿Hablamos?", en: "Let's talk?" },
+    kicker: { pt: "contato", en: "contact" },
+    title: { pt: "Vamos conversar?", en: "Let's talk?" },
     body: {
-      es: "Si lo que has visto te interesa, el teclado ya está listo para recibir el primer mensaje.",
+      pt: "Se o que você viu te interessa, o teclado já está pronto para receber a primeira mensagem.",
       en: "If what you've seen interests you, the keyboard is ready for the first message.",
     },
-    copyEmail: { es: "Copiar email", en: "Copy email" },
-    openMail: { es: "Abrir mail", en: "Open mailto" },
-    github: { es: "GitHub", en: "GitHub" },
-    linkedin: { es: "LinkedIn", en: "LinkedIn" },
-    emailToast: { es: "Email copiado", en: "Email copied" },
+    copyEmail: { pt: "Copiar email", en: "Copy email" },
+    openMail: { pt: "Abrir email", en: "Open mailto" },
+    github: { pt: "GitHub", en: "GitHub" },
+    linkedin: { pt: "LinkedIn", en: "LinkedIn" },
+    emailToast: { pt: "Email copiado", en: "Email copied" },
     footer: {
-      es: "© 2026 Txema Albero. Todos los derechos reservados.",
-      en: "© 2026 Txema Albero. All rights reserved.",
+      pt: "© 2026 André Santos. Todos os direitos reservados.",
+      en: "© 2026 André Santos. All rights reserved.",
     },
   },
   keyboard: {
     taglines: {
       javascript: {
-        es: "Donde empezó todo. Sigue aquí, sigue mandando.",
+        pt: "Onde tudo começou. Ainda aqui, ainda mandando.",
         en: "Where it all started. Still here, still in charge.",
       },
       typescript: {
-        es: "Mismo JS, con cinturón de seguridad.",
+        pt: "O mesmo JS, com cinto de segurança.",
         en: "Same JS, with a seatbelt.",
       },
       html5: {
-        es: "Los huesos de cualquier página.",
+        pt: "Os ossos de qualquer página.",
         en: "The bones of any page.",
       },
       css: {
-        es: "El detalle que separa lo bueno de lo bonito.",
+        pt: "O detalhe que separa o bom do bonito.",
         en: "What separates good from beautiful.",
       },
       tailwindcss: {
-        es: "Utility-first. Diseño en el HTML.",
+        pt: "Utility-first. Design dentro do HTML.",
         en: "Utility-first. Design inside the HTML.",
       },
       python: {
-        es: "Se lee como inglés, escala como cohete.",
+        pt: "Lê como inglês, escala como foguete.",
         en: "Reads like English, scales like a rocket.",
       },
       react: {
-        es: "Componentes, componentes, componentes.",
+        pt: "Componentes, componentes, componentes.",
         en: "Components, components, components.",
       },
       nextdotjs: {
-        es: "React adulto: routing, SSR, edge.",
+        pt: "React adulto: routing, SSR, edge.",
         en: "React all grown up: routing, SSR, edge.",
       },
       vuedotjs: {
-        es: "El frontend más relajado.",
+        pt: "O frontend mais tranquilo.",
         en: "The most relaxed frontend.",
       },
       nodedotjs: {
-        es: "JavaScript en el servidor.",
+        pt: "JavaScript no servidor.",
         en: "JavaScript on the server.",
       },
       php: {
-        es: "Mueve más web de la que crees.",
+        pt: "Roda mais da web do que você imagina.",
         en: "Runs more of the web than you think.",
       },
       odoo: {
-        es: "ERP que no hace llorar.",
+        pt: "ERP que não faz chorar.",
         en: "ERP that doesn't make you cry.",
       },
       postgresql: {
-        es: "La base de datos aburrida que siempre funciona.",
+        pt: "O banco de dados chato que sempre funciona.",
         en: "The boring database that always works.",
       },
       docker: {
-        es: "Igual en mi máquina, igual en producción.",
+        pt: "Igual na minha máquina, igual em produção.",
         en: "Same on my machine, same in production.",
       },
       git: {
-        es: "Historia y máquina del tiempo del código.",
+        pt: "Histórico e máquina do tempo do código.",
         en: "History and a time machine for your code.",
       },
     },
@@ -177,6 +175,6 @@ export function translate(path: string, lang: Lang): string {
     ref = (ref as { [key: string]: Node })[p];
     if (ref === undefined) return path;
   }
-  if (isLeaf(ref)) return ref[lang] ?? ref.es ?? path;
+  if (isLeaf(ref)) return ref[lang] ?? ref.pt ?? path;
   return path;
 }

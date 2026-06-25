@@ -86,30 +86,30 @@
 }
 
 :root[data-season="autumn"] {
-  --background: #17090a;
-  --foreground: #fff0e0;
-  --ink-0: #0f0607;
-  --ink-1: #1c0d0c;
-  --ink-2: #2b1514;
-  --ink-3: #3d2218;
-  --ice-50: #fff5ed;
-  --ice-100: #ffe5d0;
-  --ice-200: #ffc59a;
-  --ice-300: #f59a5a;
-  --ice-400: #e07230;
-  --ice-500: #b85316;
-  --ice-600: #8a3e10;
-  --ice-700: #632b0b;
+  --background: #0d0101;
+  --foreground: #ffe0e0;
+  --ink-0: #0a0101;
+  --ink-1: #180202;
+  --ink-2: #280404;
+  --ink-3: #3d0607;
+  --ice-50: #fff0f0;
+  --ice-100: #ffd6d6;
+  --ice-200: #ffaaaa;
+  --ice-300: #ff7070;
+  --ice-400: #e02020;
+  --ice-500: #b81010;
+  --ice-600: #8a0808;
+  --ice-700: #600404;
 
-  --aurora-1: rgba(184, 83, 22, 0.45);
-  --aurora-2: rgba(245, 154, 90, 0.28);
-  --aurora-3: rgba(138, 62, 16, 0.35);
-  --aurora-4: rgba(255, 197, 154, 0.18);
-  --bg-top: rgba(184, 83, 22, 0.35);
-  --bg-grad-from: #1a0a08;
-  --bg-grad-mid: #17090a;
-  --bg-grad-to: #0f0605;
-  --vignette: rgba(15, 6, 7, 0.7);
+  --aurora-1: rgba(180, 16, 16, 0.55);
+  --aurora-2: rgba(255, 80, 80, 0.22);
+  --aurora-3: rgba(100, 5, 5, 0.4);
+  --aurora-4: rgba(255, 160, 160, 0.14);
+  --bg-top: rgba(180, 16, 16, 0.38);
+  --bg-grad-from: #120101;
+  --bg-grad-mid: #0d0101;
+  --bg-grad-to: #100101;
+  --vignette: rgba(8, 1, 1, 0.78);
 }
 
 @theme inline {
@@ -137,6 +137,70 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
   transition: background 600ms ease, color 600ms ease;
+}
+
+@keyframes hero-lines-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  33% { transform: translate3d(6px, -4px, 0); }
+  66% { transform: translate3d(-5px, 5px, 0); }
+}
+
+/* ─── Hero photo mask (goo reveal) ────────────────────────────────────── */
+.photo-mask__reveal {
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, mask-image, -webkit-mask-image, clip-path;
+}
+.photo-mask__reveal.is-mask-ready {
+  opacity: 1;
+  visibility: visible;
+}
+
+.three-bg {
+  z-index: 1;
+  transition: opacity 0.7s ease;
+}
+.site-lines {
+  z-index: 0;
+}
+.site-content {
+  isolation: isolate;
+}
+
+.three-bg.three-off-projects {
+  opacity: 0;
+}
+
+/* ─── Header reativo ao scroll ──────────────────────────────────────── */
+body.header-scrolled .site-header__actions .frost-btn,
+body.header-scrolled .season-picker-btn,
+body.header-scrolled .lang-picker-btn {
+  background: color-mix(in srgb, var(--ink-1) 72%, transparent);
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  border-color: color-mix(in srgb, var(--ice-400) 28%, transparent);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+body.header-hide-logo .site-header__brand .site-header__name,
+body.header-hide-logo .site-header__brand .status-pill {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+
+.site-header__brand .site-header__name,
+.site-header__brand .status-pill {
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-lines .animate-\[hero-lines-drift_28s_ease-in-out_infinite\] {
+    animation: none !important;
+  }
+  .three-bg {
+    display: none;
+  }
 }
 
 ::selection {
@@ -193,8 +257,9 @@ body {
 
 .frozen-bg {
   background:
-    radial-gradient(1200px 900px at 50% 0%, var(--bg-top), transparent 60%),
-    linear-gradient(180deg, var(--bg-grad-from) 0%, var(--bg-grad-mid) 50%, var(--bg-grad-to) 100%);
+    radial-gradient(1400px 1100px at 50% 28%, var(--bg-top), transparent 72%),
+    radial-gradient(1000px 800px at 50% 88%, color-mix(in srgb, var(--aurora-3) 45%, transparent), transparent 68%),
+    linear-gradient(180deg, var(--bg-grad-from) 0%, var(--bg-grad-mid) 55%, var(--bg-grad-to) 100%);
   transition: background 600ms ease;
 }
 
