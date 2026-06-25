@@ -6,7 +6,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 import Carousel from "@/components/Carousel";
 import type { Lang } from "@/lib/i18n";
 
-type Localised = { es: string; en: string };
+type Localised = { pt: string; en: string };
 
 export type ProjectDetail = {
   num: string;
@@ -32,7 +32,7 @@ type Props = {
   onClose: () => void;
 };
 
-function pick<T>(loc: { es: T; en: T }, lang: Lang): T {
+function pick<T>(loc: { pt: T; en: T }, lang: Lang): T {
   return loc[lang];
 }
 

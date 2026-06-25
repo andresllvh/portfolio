@@ -1,16 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
-import FrozenBackground from "@/components/FrozenBackground";
+import AuroraBackdrop from "@/components/AuroraBackdrop";
+import SiteLines from "@/components/effects/SiteLines";
+import ThreeBackground from "@/components/ThreeBackground";
+import HeaderScroll from "@/components/HeaderScroll";
 import ScrollProgress from "@/components/ScrollProgress";
 import MagneticTargets from "@/components/MagneticTargets";
-import SeasonProvider, {
-  SEASON_BOOT_SCRIPT,
-} from "@/components/SeasonProvider";
-import LanguageProvider, {
-  LANG_BOOT_SCRIPT,
-} from "@/components/LanguageProvider";
+import SeasonProvider from "@/components/SeasonProvider";
+import LanguageProvider from "@/components/LanguageProvider";
+import { SEASONS, DEFAULT_SEASON, type SeasonId } from "@/lib/seasons";
+import { LANGUAGES, DEFAULT_LANG, type Lang } from "@/lib/i18n";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,22 +25,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Txema Albero — Software Engineer & Tech Lead",
+  title: "André Santos — Frontend Developer",
   description:
-    "Portfolio inmersivo de Txema Albero — Software Engineer / Tech Lead. Experiencias web 3D con Next.js y React Three Fiber.",
-  authors: [{ name: "Txema Albero" }],
+    "Portfólio de André Santos — Frontend Developer especializado em React, TypeScript e Cloud Computing. João Pessoa, PB.",
+  authors: [{ name: "André Santos" }],
   openGraph: {
-    title: "Txema Albero — Software Engineer & Tech Lead",
+    title: "André Santos — Frontend Developer",
     description:
-      "Portfolio inmersivo con escena 3D interactiva. Next.js, React Three Fiber, GLSL.",
+      "Portfólio interativo com efeitos 3D. React, TypeScript, Next.js, Firebase.",
     type: "website",
-    locale: "es_ES",
+    locale: "pt_BR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Txema Albero — Software Engineer & Tech Lead",
+    title: "André Santos — Frontend Developer",
     description:
-      "Portfolio inmersivo con escena 3D interactiva. Next.js, React Three Fiber, GLSL.",
+      "Portfólio interativo com efeitos 3D. React, TypeScript, Next.js, Firebase.",
   },
 };
 
@@ -47,32 +49,45 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+
+  const rawSeason = cookieStore.get("portfolio-season")?.value;
+  const season: SeasonId = SEASONS.some((s) => s.id === rawSeason)
+    ? (rawSeason as SeasonId)
+    : DEFAULT_SEASON;
+
+  const rawLang = cookieStore.get("portfolio-lang")?.value;
+  const lang: Lang = LANGUAGES.includes(rawLang as Lang)
+    ? (rawLang as Lang)
+    : DEFAULT_LANG;
+
   return (
     <html
-      lang="es"
+      lang={lang}
+      data-season={season}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        {/* Run synchronously before hydration to apply the user's stored
-            season + language — avoids a flash of the default values. */}
-        <script dangerouslySetInnerHTML={{ __html: SEASON_BOOT_SCRIPT }} />
-        <script dangerouslySetInnerHTML={{ __html: LANG_BOOT_SCRIPT }} />
-      </head>
+      <head />
       <body
         className="min-h-full flex flex-col"
         suppressHydrationWarning
       >
-        <LanguageProvider>
-          <SeasonProvider>
-            <FrozenBackground />
+        <LanguageProvider initialLang={lang}>
+          <SeasonProvider initialSeason={season}>
+            <AuroraBackdrop />
+            <SiteLines />
+            <ThreeBackground />
+            <HeaderScroll />
             <ScrollProgress />
-            {children}
+            <div className="site-content relative z-[2] flex min-h-full flex-1 flex-col">
+              {children}
+            </div>
             <CustomCursor />
             <MagneticTargets />
           </SeasonProvider>

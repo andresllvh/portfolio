@@ -4,13 +4,11 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useState,
   type ReactNode,
 } from "react";
 import {
   DEFAULT_LANG,
-  LANGUAGES,
   translate,
   type Lang,
 } from "@/lib/i18n";
@@ -24,26 +22,18 @@ type LanguageCtx = {
 const Ctx = createContext<LanguageCtx | null>(null);
 
 const STORAGE_KEY = "portfolio-lang";
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
 
-// Inlined in <head> before hydration so the document lang attribute matches
-// the user's stored preference (avoids FOUC and wrong screen-reader lang).
-export const LANG_BOOT_SCRIPT = `(function(){try{var l=localStorage.getItem(${JSON.stringify(STORAGE_KEY)});var ok=${JSON.stringify(LANGUAGES)};if(l&&ok.indexOf(l)>-1){document.documentElement.lang=l;}}catch(e){}})();`;
-
-export default function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(DEFAULT_LANG);
-
-  useEffect(() => {
-    // Sync React state with whatever the boot script already applied to the
-    // <html> element. No-op if the boot script didn't find a stored pref.
-    const domLang = document.documentElement.lang;
-    if (
-      (domLang === "es" || domLang === "en") &&
-      domLang !== lang
-    ) {
-      setLangState(domLang);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+export default function LanguageProvider({
+  children,
+  initialLang,
+}: {
+  children: ReactNode;
+  initialLang: Lang;
+}) {
+  // Initialised from the server-read cookie value so the client state matches
+  // the SSR-rendered DOM attribute without needing a useEffect sync.
+  const [lang, setLangState] = useState<Lang>(initialLang);
 
   const setLang = useCallback((next: Lang) => {
     setLangState(next);
@@ -53,6 +43,9 @@ export default function LanguageProvider({ children }: { children: ReactNode }) 
     } catch {
       // Ignore — state still updates in-memory.
     }
+    // Write a cookie so the server can read the preference on the next request
+    // and SSR the correct language without any boot script.
+    document.cookie = `${STORAGE_KEY}=${next}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
   }, []);
 
   const t = useCallback((path: string) => translate(path, lang), [lang]);

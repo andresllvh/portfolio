@@ -666,7 +666,8 @@ function Keyboard({ mobile }: { mobile: boolean }) {
     const yawSwing = isShowcase ? 0.5 : 0.025;
     const pitchSwing = isShowcase ? 0.07 : 0.0;
     const rollSwing = isShowcase ? 0.05 : 0.0;
-    const period = isShowcase ? 9 : 20; // seconds per full cycle
+    // Match the hero/start-screen timing across the 3D portfolio
+    const period = 9; // seconds per full cycle (uniform)
     const w = (Math.PI * 2) / period;
     ref.current.rotation.y =
       c.yaw + Math.sin(t * w) * yawSwing + spinRef.current;

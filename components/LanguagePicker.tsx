@@ -15,7 +15,7 @@ export default function LanguagePicker({
 
   return (
     <div
-      className={`inline-flex items-center p-1 rounded-full bg-ink-2/60 backdrop-blur-sm border border-ink-3 ${className}`}
+      className={`lang-picker-btn inline-flex items-center p-1 rounded-full bg-ink-2/60 backdrop-blur-sm border border-ink-3 transition-all duration-300 ${className}`}
       role="group"
       aria-label={t("picker.language")}
     >
