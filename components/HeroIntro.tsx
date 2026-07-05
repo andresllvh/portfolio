@@ -40,7 +40,7 @@ export default function HeroIntro() {
     <section
       id="hero-intro"
       ref={containerRef}
-      style={{ position: "relative", height: "500vh" }}
+      style={{ position: "relative", height: "220vh" }}
     >
       <div
         style={{
@@ -55,10 +55,11 @@ export default function HeroIntro() {
           justifyContent: "center",
           padding: "28px 48px 16px",
           background: `
-            radial-gradient(ellipse 110% 70% at 50% 18%, rgba(31,72,116,0.48), transparent 62%),
-            radial-gradient(ellipse 80% 55% at 50% 95%, rgba(47,98,147,0.30), transparent 68%),
-            linear-gradient(180deg, rgba(31,72,116,0.18), #060e1c 100%)
+            radial-gradient(ellipse 110% 70% at 50% 18%, var(--aurora-1), transparent 62%),
+            radial-gradient(ellipse 80% 55% at 50% 95%, var(--aurora-3), transparent 68%),
+            linear-gradient(180deg, var(--bg-grad-from) 0%, var(--background) 100%)
           `,
+          transition: "background 600ms ease",
         }}
       >
         {/* hint */}
@@ -72,13 +73,13 @@ export default function HeroIntro() {
             ...MONO,
             fontSize: 13,
             letterSpacing: "0.35em",
-            color: "#a6c5e4",
+            color: "var(--ice-300)",
             textTransform: "uppercase",
             whiteSpace: "nowrap",
             textAlign: "center",
           }}
         >
-          passe o mouse para revelar
+          passe o mouse sobre o rosto para revelar
         </motion.div>
 
         {/* Retrato fluido — canvas WebGL revela a máscara dev no hover */}
@@ -121,25 +122,25 @@ export default function HeroIntro() {
               marginBottom: 16,
               padding: "4px 14px",
               borderRadius: 99,
-              background: "rgba(122,166,208,0.10)",
-              border: "1px solid rgba(122,166,208,0.28)",
+              background: "color-mix(in srgb, var(--ice-400) 10%, transparent)",
+              border: "1px solid color-mix(in srgb, var(--ice-400) 28%, transparent)",
             }}
           >
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 6px #4ade80", flexShrink: 0 }} />
-            <span style={{ ...MONO, fontSize: 9, letterSpacing: "0.3em", color: "#a6c5e4", textTransform: "uppercase" }}>
+            <span style={{ ...MONO, fontSize: 9, letterSpacing: "0.3em", color: "var(--ice-300)", textTransform: "uppercase" }}>
               aberto a oportunidades
             </span>
           </motion.div>
 
           <motion.div style={{ opacity: nameOp, y: nameY, marginBottom: 6 }}>
             <h1 style={{ lineHeight: 0.88, letterSpacing: "-0.03em", userSelect: "none", margin: 0 }}>
-              <span style={{ display: "block", fontSize: "clamp(2.4rem, 6.5vw, 6.5rem)", fontWeight: 900, color: "#e9f2fb" }}>
+              <span style={{ display: "block", fontSize: "clamp(2.4rem, 6.5vw, 6.5rem)", fontWeight: 900, color: "var(--foreground)" }}>
                 ANDRÉ
               </span>
               <span style={{
                 display: "block", fontSize: "clamp(2.4rem, 6.5vw, 6.5rem)", fontWeight: 900,
-                WebkitTextStroke: "2px #7aa6d0", color: "transparent",
-                textShadow: "0 0 60px rgba(122,166,208,0.35)",
+                WebkitTextStroke: "2px var(--ice-400)", color: "transparent",
+                textShadow: "0 0 60px color-mix(in srgb, var(--ice-400) 35%, transparent)",
               }}>
                 SANTOS
               </span>
@@ -147,15 +148,15 @@ export default function HeroIntro() {
           </motion.div>
 
           <motion.div style={{ opacity: roleOp, y: roleY, display: "flex", alignItems: "center", gap: 12, justifyContent: "center" }}>
-            <div style={{ width: 32, height: 1, background: "#4d85b6" }} />
+            <div style={{ width: 32, height: 1, background: "var(--ice-500)" }} />
             <span style={{
               ...MONO, fontSize: 11, letterSpacing: "0.3em",
-              color: "#7aa6d0", textShadow: "0 0 14px rgba(122,166,208,0.5)",
+              color: "var(--ice-400)", textShadow: "0 0 14px color-mix(in srgb, var(--ice-400) 50%, transparent)",
               textTransform: "uppercase",
             }}>
               Developer
             </span>
-            <div style={{ width: 32, height: 1, background: "#4d85b6" }} />
+            <div style={{ width: 32, height: 1, background: "var(--ice-500)" }} />
           </motion.div>
         </div>
 
@@ -168,13 +169,13 @@ export default function HeroIntro() {
             pointerEvents: "none", zIndex: 4,
           }}
         >
-          <span style={{ ...MONO, fontSize: 8, letterSpacing: "0.35em", color: "#a6c5e4", opacity: 0.3, textTransform: "uppercase" }}>
-            scroll
+          <span style={{ ...MONO, fontSize: 9, letterSpacing: "0.3em", color: "var(--ice-300)", opacity: 0.55, textTransform: "uppercase", whiteSpace: "nowrap" }}>
+            role para ver o portfólio
           </span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ width: 1, height: 32, background: "linear-gradient(to bottom, #4d85b6, transparent)" }}
+            style={{ width: 1, height: 32, background: "linear-gradient(to bottom, var(--ice-500), transparent)" }}
           />
         </motion.div>
 
@@ -183,7 +184,7 @@ export default function HeroIntro() {
           style={{
             position: "absolute", bottom: 0, left: 0, right: 0, height: 2,
             scaleX: scrollYProgress, transformOrigin: "left", zIndex: 4,
-            background: "linear-gradient(90deg, #2f6293, #7aa6d0, #cfe0f2)",
+            background: "linear-gradient(90deg, var(--ice-600), var(--ice-400), var(--ice-200))",
           }}
         />
       </div>

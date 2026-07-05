@@ -34,7 +34,7 @@ const fluidFragmentShader = `
         projAlong = clamp(projAlong, 0.0, lineLength);
         vec2 closestPoint = uPrevMouse + projAlong * mouseDir;
         float dist = length(vUv - closestPoint);
-        float intensity = smoothstep(0.105, 0.0, dist) * 0.34;
+        float intensity = smoothstep(0.12, 0.0, dist) * 0.34;
         newValue += intensity;
       }
     }
@@ -197,7 +197,7 @@ export function initPortraitReveal({
       uPrevTrails: { value: null as THREE.Texture | null },
       uMouse: { value: mouse },
       uPrevMouse: { value: prevMouse },
-      uDecay: { value: 0.97 },
+      uDecay: { value: 0.955 },
       uIsMoving: { value: false },
     },
     vertexShader,
