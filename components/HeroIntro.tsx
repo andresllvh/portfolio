@@ -2,6 +2,7 @@
 import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import FluidPortrait from "@/components/effects/FluidPortrait";
+import { PORTRAIT_FRAME_HEIGHT } from "@/lib/heroPortraitImage";
 
 const PORTRAIT_SRC = "/images/andre-real.png";
 const PORTRAIT_MASK_SRC = "/images/mascara.png";
@@ -95,7 +96,9 @@ export default function HeroIntro() {
           </div>
         </div>
 
-        {/* Texto abaixo do retrato — badge, nome, cargo */}
+        {/* Texto abaixo do retrato — badge, nome, cargo. A foto dissolve
+            totalmente aos 60% da própria altura, então puxamos o bloco pra
+            cima nessa mesma proporção pra não sobrar vão vazio. */}
         <div
           style={{
             flexShrink: 0,
@@ -104,7 +107,7 @@ export default function HeroIntro() {
             alignItems: "center",
             textAlign: "center",
             zIndex: 15,
-            paddingTop: 18,
+            marginTop: `calc(${PORTRAIT_FRAME_HEIGHT} * -0.34)`,
             width: "100%",
             pointerEvents: "none",
           }}
