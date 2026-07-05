@@ -2,12 +2,17 @@ import type React from "react";
 
 /* ─── FluidPortrait — só layout/CSS (shader intocado) ─────────────────── */
 
+/** Altura do frame do retrato — reutilizada pelo HeroIntro para puxar o
+ * texto abaixo para perto do fim do degradê (a foto dissolve por completo
+ * aos 60% da altura, então ~40% da caixa fica "vazio" por baixo). */
+export const PORTRAIT_FRAME_HEIGHT = "min(80vh, 760px)";
+
 /** Proporção exata da foto original (768 x 1377) — o frame nunca corta a
  * cabeça e o cover do shader (getCoverUV) fica idêntico a um contain, já
  * que a caixa tem a mesma proporção da imagem. */
 export const portraitFrameStyle: React.CSSProperties = {
   position: "relative",
-  height: "min(74vh, 700px)",
+  height: PORTRAIT_FRAME_HEIGHT,
   maxHeight: "100%",
   aspectRatio: "768 / 1377",
   maxWidth: "92vw",

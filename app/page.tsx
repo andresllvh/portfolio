@@ -185,13 +185,14 @@ export default function Home() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [showKeyboard, setShowKeyboard] = useState(false);
 
-  // Show the fixed 3D keyboard once the user has scrolled past the hero.
-  // Uses an absolute position threshold so visibility is instant on scroll,
-  // with no direction-tracking delay.
+  // Show the fixed 3D keyboard only once the sticky hero-intro photo has
+  // fully scrolled past — otherwise it renders on top of the hero photo,
+  // since both are position:fixed/sticky full-screen layers.
   useEffect(() => {
-    const THRESHOLD = 80;
     const onScroll = () => {
-      setShowKeyboard(window.scrollY > THRESHOLD);
+      const hero = document.getElementById("hero-intro");
+      const heroBottom = hero ? hero.getBoundingClientRect().bottom : 0;
+      setShowKeyboard(heroBottom <= 0);
     };
     // Set correct state immediately in case the page is already scrolled
     // (e.g. after a browser back-navigation).
