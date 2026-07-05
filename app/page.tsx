@@ -106,6 +106,45 @@ const experiences: Array<{
   stack: string[];
 }> = [
   {
+    role: {
+      pt: "Desenvolvedor Full Stack / Assistente de Processos e Automações",
+      en: "Full Stack Developer / Process & Automation Assistant",
+    },
+    company: "Bloco Construções S.A.",
+    period: { pt: "Jan/2026 — Atual", en: "Jan/2026 — Present" },
+    location: { pt: "João Pessoa, Brasil", en: "João Pessoa, Brazil" },
+    summary: {
+      pt: "Atuação no desenvolvimento, evolução e manutenção de sistemas corporativos voltados para Recursos Humanos, Suprimentos e Processos Internos. Participação na implementação de novas funcionalidades, integrações entre sistemas, auditorias de segurança, automações e melhorias contínuas, utilizando tecnologias modernas e boas práticas de desenvolvimento.",
+      en: "Development, evolution and maintenance of corporate systems for Human Resources, Procurement and Internal Processes. Involved in implementing new features, system integrations, security audits, automations and continuous improvements, using modern technologies and development best practices.",
+    },
+    bullets: [
+      {
+        pt: "Desenvolvimento e manutenção de sistemas web com TypeScript, JavaScript, React, Node.js e Supabase.",
+        en: "Development and maintenance of web systems with TypeScript, JavaScript, React, Node.js and Supabase.",
+      },
+      {
+        pt: "Implementação de integrações com APIs REST, Edge Functions e serviços externos.",
+        en: "Implementation of integrations with REST APIs, Edge Functions and external services.",
+      },
+      {
+        pt: "Arquitetura e implementação de segurança: auditorias, LGPD, RLS, validação de uploads e controle de acesso.",
+        en: "Security architecture and implementation: audits, LGPD compliance, RLS, upload validation and access control.",
+      },
+    ],
+    stack: [
+      "TypeScript",
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Supabase",
+      "PostgreSQL",
+      "REST API",
+      "Git",
+      "Postman",
+      "LGPD",
+    ],
+  },
+  {
     role: { pt: "Suporte Técnico", en: "Technical Support" },
     company: "Fácil Tecnologia",
     period: { pt: "Out/2025 — Presente", en: "Oct/2025 — Present" },
