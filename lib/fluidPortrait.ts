@@ -21,7 +21,14 @@ const fluidFragmentShader = `
 
   void main() {
     vec4 prevState = texture2D(uPrevTrails, vUv);
-    float newValue = prevState.r * uDecay;
+    // Pure multiplicative decay on an 8-bit trail texture can get stuck: at
+    // low values, decaying by uDecay rounds right back up to the same 8-bit
+    // level every frame, so the trail never actually reaches zero (visible
+    // as the reveal staying "on" forever once touched, seen on real iOS
+    // devices — desktop float/half-float targets have enough precision to
+    // never hit this). Subtracting a small fixed amount guarantees the
+    // value keeps dropping regardless of rounding.
+    float newValue = max(0.0, prevState.r * uDecay - 0.004);
 
     if (uIsMoving) {
       vec2 mouseDirection = uMouse - uPrevMouse;
