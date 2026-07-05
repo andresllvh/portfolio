@@ -122,25 +122,21 @@ function loadTexture(
 function createFluidRenderTarget(
   renderer: THREE.WebGLRenderer,
 ): THREE.WebGLRenderTarget {
-  const types = [THREE.FloatType, THREE.HalfFloatType, THREE.UnsignedByteType];
-  for (const type of types) {
-    let rt: THREE.WebGLRenderTarget | null = null;
-    try {
-      rt = new THREE.WebGLRenderTarget(600, 600, {
-        minFilter: THREE.LinearFilter,
-        magFilter: THREE.LinearFilter,
-        format: THREE.RGBAFormat,
-        type,
-      });
-      renderer.setRenderTarget(rt);
-      renderer.clear();
-      renderer.setRenderTarget(null);
-      return rt;
-    } catch {
-      rt?.dispose();
-    }
-  }
-  throw new Error("[FluidPortrait] Nenhum formato de render target suportado.");
+  // UnsignedByteType only — iOS Safari's WebGL will happily *create* and
+  // *clear* a float/half-float render target (so the old try/catch fallback
+  // never tripped), but silently fails to actually render into one with
+  // LinearFilter, leaving the fluid trail permanently blank. Byte targets
+  // work everywhere, and the sim only ever needs the 0–1 range anyway.
+  const rt = new THREE.WebGLRenderTarget(600, 600, {
+    minFilter: THREE.LinearFilter,
+    magFilter: THREE.LinearFilter,
+    format: THREE.RGBAFormat,
+    type: THREE.UnsignedByteType,
+  });
+  renderer.setRenderTarget(rt);
+  renderer.clear();
+  renderer.setRenderTarget(null);
+  return rt;
 }
 
 export function initPortraitReveal({
