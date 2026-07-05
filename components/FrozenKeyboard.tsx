@@ -813,8 +813,14 @@ function Keyboard({ mobile }: { mobile: boolean }) {
 
 export default function FrozenKeyboard({
   mobile = false,
+  interactive = true,
 }: {
   mobile?: boolean;
+  /** react-three-fiber sets pointer-events:auto on the canvas itself, which
+   * overrides a hidden/non-interactive ancestor (e.g. the desktop keyboard
+   * layer while it's still faded out behind the hero photo). Pass false to
+   * force it back off so hover/sound don't leak through. */
+  interactive?: boolean;
 }) {
   return (
     <Canvas
@@ -832,6 +838,7 @@ export default function FrozenKeyboard({
         alpha: true,
         powerPreference: "high-performance",
       }}
+      style={{ pointerEvents: interactive ? "auto" : "none" }}
     >
       {/* Canvas is transparent so the FrozenBackground (snow + aurora) shows
           through behind/around the keyboard. */}
