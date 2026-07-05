@@ -255,10 +255,23 @@ export function initPortraitReveal({
     updatePointer(e.clientX, e.clientY);
   }
 
+  // The canvas inherits pointer-events:none from its wrapper (so it never
+  // becomes the touch target), so this has to stay on window like
+  // onPointerMove. It only blocks scroll (preventDefault) when the finger is
+  // actually over the portrait — everywhere else on the page, touch scroll
+  // passes through untouched.
   function onTouchMove(e: TouchEvent) {
     if (!e.touches.length) return;
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    const inside =
+      touch.clientX >= rect.left &&
+      touch.clientX <= rect.right &&
+      touch.clientY >= rect.top &&
+      touch.clientY <= rect.bottom;
+    if (!inside) return;
     e.preventDefault();
-    updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+    updatePointer(touch.clientX, touch.clientY);
   }
 
   function onResize() {

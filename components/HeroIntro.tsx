@@ -53,7 +53,7 @@ export default function HeroIntro() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "28px 48px 16px",
+          padding: "clamp(16px, 5vw, 28px) clamp(16px, 6vw, 48px) clamp(12px, 4vw, 16px)",
           background: `
             radial-gradient(ellipse 110% 70% at 50% 18%, var(--aurora-1), transparent 62%),
             radial-gradient(ellipse 80% 55% at 50% 95%, var(--aurora-3), transparent 68%),
@@ -71,12 +71,12 @@ export default function HeroIntro() {
             zIndex: 15,
             pointerEvents: "none",
             ...MONO,
-            fontSize: 13,
-            letterSpacing: "0.35em",
+            fontSize: "clamp(10px, 3vw, 13px)",
+            letterSpacing: "clamp(0.12em, 1.2vw, 0.35em)",
             color: "var(--ice-300)",
             textTransform: "uppercase",
-            whiteSpace: "nowrap",
             textAlign: "center",
+            maxWidth: "88vw",
           }}
         >
           passe o mouse sobre o rosto para revelar
@@ -169,7 +169,7 @@ export default function HeroIntro() {
             pointerEvents: "none", zIndex: 4,
           }}
         >
-          <span style={{ ...MONO, fontSize: 9, letterSpacing: "0.3em", color: "var(--ice-300)", opacity: 0.55, textTransform: "uppercase", whiteSpace: "nowrap" }}>
+          <span style={{ ...MONO, fontSize: "clamp(8px, 2.2vw, 9px)", letterSpacing: "clamp(0.1em, 1vw, 0.3em)", color: "var(--ice-300)", opacity: 0.55, textTransform: "uppercase", whiteSpace: "nowrap" }}>
             role para ver o portfólio
           </span>
           <motion.div

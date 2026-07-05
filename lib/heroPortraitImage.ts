@@ -2,20 +2,28 @@ import type React from "react";
 
 /* ─── FluidPortrait — só layout/CSS (shader intocado) ─────────────────── */
 
-/** Altura do frame do retrato — reutilizada pelo HeroIntro para puxar o
- * texto abaixo para perto do fim do degradê (a foto dissolve por completo
- * aos 60% da altura, então ~40% da caixa fica "vazio" por baixo). */
-export const PORTRAIT_FRAME_HEIGHT = "min(80vh, 760px)";
+/** Largura do frame — a menor entre 92% da viewport e a largura que caberia
+ * em 80% da altura da viewport (convertida via a proporção da foto). Isso
+ * replica um "object-fit: contain" só com CSS: em telas baixas e largas o
+ * limite é a altura; em celulares estreitos o limite é a largura — sem
+ * nunca esticar/cortar a foto fora da proporção real (768 x 1377). */
+export const PORTRAIT_FRAME_WIDTH =
+  "min(92vw, calc(80vh * 768 / 1377))";
+
+/** Altura equivalente (espelha a largura acima pela mesma proporção) —
+ * reutilizada pelo HeroIntro para puxar o texto abaixo para perto do fim
+ * do degradê (a foto dissolve por completo aos 60% da altura, então ~40%
+ * da caixa fica "vazio" por baixo). */
+export const PORTRAIT_FRAME_HEIGHT =
+  "min(calc(92vw * 1377 / 768), 80vh)";
 
 /** Proporção exata da foto original (768 x 1377) — o frame nunca corta a
  * cabeça e o cover do shader (getCoverUV) fica idêntico a um contain, já
  * que a caixa tem a mesma proporção da imagem. */
 export const portraitFrameStyle: React.CSSProperties = {
   position: "relative",
-  height: PORTRAIT_FRAME_HEIGHT,
-  maxHeight: "100%",
+  width: PORTRAIT_FRAME_WIDTH,
   aspectRatio: "768 / 1377",
-  maxWidth: "92vw",
   margin: "0 auto",
 };
 
