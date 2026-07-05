@@ -3,7 +3,7 @@
 import { useRef, useLayoutEffect, memo } from "react";
 import { initPortraitReveal } from "@/lib/fluidPortrait";
 import {
-  portraitBlurBackgroundStyle,
+  portraitAmbientGlowStyle,
   portraitCanvasBodyFadeStyle,
   portraitFrameStyle,
 } from "@/lib/heroPortraitImage";
@@ -63,22 +63,13 @@ export default memo(function FluidPortrait({
       aria-label={alt}
       role="img"
     >
-      {/* Stage blur — overflow visible para não cortar expansão do desfoque */}
+      {/* Brilho ambiente atrás da cabeça — cor de destaque do tema ativo */}
       <div className="fluid-portrait__blur-stage pointer-events-none absolute inset-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={topSrc}
-          alt=""
-          aria-hidden
-          className="fluid-portrait__blur-bg"
-          style={portraitBlurBackgroundStyle}
-          draggable={false}
-        />
+        <div aria-hidden style={portraitAmbientGlowStyle} />
       </div>
 
       {/* Canvas nítido + máscara fluida — inalterado */}
       <div className="fluid-portrait__canvas-stage pointer-events-none absolute inset-0">
-        <div className="fluid-portrait__theme-fade" aria-hidden />
         <canvas
           ref={canvasRef}
           className="portrait-canvas absolute inset-0 z-[2] block h-full w-full touch-none"
