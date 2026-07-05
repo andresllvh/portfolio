@@ -1,15 +1,10 @@
 "use client";
 import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import PhotoMask from "@/components/effects/PhotoMask";
-import {
-  PORTRAIT_SRC,
-  PORTRAIT_MASK_SRC,
-  PORTRAIT_ASPECT_RATIO,
-  portraitFrameStyle,
-  portraitBodyBlurStyle,
-  portraitCanvasBodyFadeStyle,
-} from "@/lib/heroPortraitImage";
+import FluidPortrait from "@/components/effects/FluidPortrait";
+
+const PORTRAIT_SRC = "/images/andre-real.png";
+const PORTRAIT_MASK_SRC = "/images/mascara.png";
 
 const MONO: React.CSSProperties = {
   fontFamily: "'SF Mono', 'Courier New', monospace",
@@ -85,33 +80,18 @@ export default function HeroIntro() {
           passe o mouse para revelar
         </motion.div>
 
-        {/* Retrato: aspect-ratio idêntico à foto original — cabeça nunca corta */}
-        <div style={{ ...portraitFrameStyle, flexShrink: 1, minHeight: 0 }}>
-          {/* Camada de glow desfocado atrás — dá o efeito de "corpo dissolvendo em luz" */}
-          <img
-            src={PORTRAIT_SRC}
-            alt=""
-            aria-hidden
-            draggable={false}
-            style={portraitBodyBlurStyle}
-          />
-
-          {/* Camada nítida (interativa — hover revela a máscara) com fade do corpo */}
-          <div
-            ref={photoWrapRef}
-            style={{
-              position: "absolute",
-              inset: 0,
-              zIndex: 2,
-              pointerEvents: "auto",
-              ...portraitCanvasBodyFadeStyle,
-            }}
-          >
-            <PhotoMask
-              normalSrc={PORTRAIT_SRC}
-              spiderSrc={PORTRAIT_MASK_SRC}
-              aspectRatio={PORTRAIT_ASPECT_RATIO}
-            />
+        {/* Retrato fluido — canvas WebGL revela a máscara dev no hover */}
+        <div
+          style={{
+            flexShrink: 1,
+            minHeight: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div ref={photoWrapRef} style={{ pointerEvents: "auto" }}>
+            <FluidPortrait topSrc={PORTRAIT_SRC} bottomSrc={PORTRAIT_MASK_SRC} />
           </div>
         </div>
 
