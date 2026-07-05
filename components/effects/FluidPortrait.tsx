@@ -59,7 +59,13 @@ export default memo(function FluidPortrait({
     <div
       ref={wrapRef}
       className="fluid-portrait relative mx-auto"
-      style={portraitFrameStyle}
+      // pan-y tells the browser it can start native vertical scroll on this
+      // element immediately, without waiting to see if JS calls
+      // preventDefault first — that's what was starving the mask's
+      // touchmove updates once a drag over the photo got claimed as a
+      // scroll gesture. Vertical scroll now happens *and* touchmove keeps
+      // firing so the reveal still tracks the finger.
+      style={{ ...portraitFrameStyle, touchAction: "pan-y" }}
       aria-label={alt}
       role="img"
     >
