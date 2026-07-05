@@ -255,22 +255,51 @@ export function initPortraitReveal({
     updatePointer(e.clientX, e.clientY);
   }
 
-  // The canvas inherits pointer-events:none from its wrapper (so it never
-  // becomes the touch target), so this has to stay on window like
-  // onPointerMove. It only blocks scroll (preventDefault) when the finger is
-  // actually over the portrait — everywhere else on the page, touch scroll
-  // passes through untouched.
-  function onTouchMove(e: TouchEvent) {
-    if (!e.touches.length) return;
-    const touch = e.touches[0];
+  function touchInsideCanvas(touch: Touch) {
     const rect = canvas.getBoundingClientRect();
-    const inside =
+    return (
       touch.clientX >= rect.left &&
       touch.clientX <= rect.right &&
       touch.clientY >= rect.top &&
-      touch.clientY <= rect.bottom;
-    if (!inside) return;
-    e.preventDefault();
+      touch.clientY <= rect.bottom
+    );
+  }
+
+  // Snaps prevMouse to just beside the tap (not the exact same point — the
+  // fluid shader only paints along a mouse→prevMouse segment with nonzero
+  // length, so a truly stationary tap would paint nothing at all) and mouse
+  // to the tap itself. That tiny offset is well inside the brush radius, so
+  // it reads as a dab, not a streak from wherever the pointer last was.
+  function resetPointerAt(clientX: number, clientY: number) {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width < 1 || rect.height < 1) return;
+    const x = (clientX - rect.left) / rect.width;
+    const y = 1 - (clientY - rect.top) / rect.height;
+    prevMouse.set(x + 0.015, y + 0.015);
+    mouse.set(x, y);
+    pointer.set(x, y);
+    isMoving = true;
+    lastMoveTime = performance.now();
+  }
+
+  // Fires immediately on contact — mobile browsers may throttle/suppress
+  // touchmove once a gesture is classified as a scroll, so this guarantees a
+  // visible reveal at the tap point even if no further touchmove arrives.
+  function onTouchStart(e: TouchEvent) {
+    if (!e.touches.length) return;
+    const touch = e.touches[0];
+    if (!touchInsideCanvas(touch)) return;
+    resetPointerAt(touch.clientX, touch.clientY);
+  }
+
+  // Never calls preventDefault — the page must stay scrollable everywhere,
+  // even while a finger is over the portrait. The reveal still tracks the
+  // touch position (while it's within the canvas) as the finger passes by;
+  // it just no longer fights the browser for the gesture.
+  function onTouchMove(e: TouchEvent) {
+    if (!e.touches.length) return;
+    const touch = e.touches[0];
+    if (!touchInsideCanvas(touch)) return;
     updatePointer(touch.clientX, touch.clientY);
   }
 
@@ -305,7 +334,8 @@ export function initPortraitReveal({
   }
 
   window.addEventListener("pointermove", onPointerMove, { passive: true });
-  window.addEventListener("touchmove", onTouchMove, { passive: false });
+  window.addEventListener("touchstart", onTouchStart, { passive: true });
+  window.addEventListener("touchmove", onTouchMove, { passive: true });
   window.addEventListener("resize", onResize);
 
   const ro = parent ? new ResizeObserver(onResize) : null;
@@ -317,6 +347,7 @@ export function initPortraitReveal({
   return () => {
     cancelAnimationFrame(frameId);
     window.removeEventListener("pointermove", onPointerMove);
+    window.removeEventListener("touchstart", onTouchStart);
     window.removeEventListener("touchmove", onTouchMove);
     window.removeEventListener("resize", onResize);
     ro?.disconnect();
