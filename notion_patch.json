@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "Água 💧 (meta 2L / 4×500ml)": { "name": "💧 Água (meta 2L / 4×500ml)" },
+    "Progresso": { "name": "📊 Progresso" },
+    "— acordar cedo (off)": { "name": "🌅 — acordar cedo (off)" },
+    "refeições (meta 2215 kcal)": { "name": "🍽 refeições (meta 2215 kcal)" },
+    "creatina 5g": { "name": "💊 creatina 5g" },
+    "treinar 🏋️": { "name": "🏋️ treinar" },
+    "portfólio 3D (mexer)": { "name": "💻 portfólio 3D (mexer)" },
+    "— faculdade (off)": { "name": "🎓 — faculdade (off)" },
+    "— Escola Nuvem (off)": { "name": "☁️ — Escola Nuvem (off)" },
+    "livro JavaScript": { "name": "📘 livro JavaScript" },
+    "terminar portfólio": { "name": "🎯 terminar portfólio" },
+    "ler Bíblia": { "name": "📖 ler Bíblia" }
+  }
+}

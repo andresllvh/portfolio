@@ -1,10 +1,17 @@
 "use client";
 
-import { useRef, useLayoutEffect, memo, useState } from "react";
+import { useRef, useLayoutEffect, memo } from "react";
 import { initPortraitReveal } from "@/lib/fluidPortrait";
+import {
+  portraitBlurBackgroundStyle,
+  portraitCanvasBodyFadeStyle,
+  portraitFrameStyle,
+} from "@/lib/heroPortraitImage";
 
 type FluidPortraitProps = {
+  /** Foto normal — visível sem hover */
   topSrc: string;
+  /** Foto com máscara — revelada pelo fluido */
   bottomSrc: string;
   alt?: string;
 };
@@ -16,14 +23,12 @@ export default memo(function FluidPortrait({
 }: FluidPortraitProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [webglOk, setWebglOk] = useState(false);
 
   useLayoutEffect(() => {
     const canvas = canvasRef.current;
     const wrap = wrapRef.current;
     if (!canvas || !wrap) return;
 
-    setWebglOk(false);
     let destroy: (() => void) | undefined;
     let cancelled = false;
 
@@ -32,10 +37,8 @@ export default memo(function FluidPortrait({
       try {
         destroy?.();
         destroy = initPortraitReveal({ canvas, topSrc, bottomSrc });
-        setWebglOk(true);
       } catch (err) {
         console.error("[FluidPortrait]", err);
-        setWebglOk(false);
       }
     };
 
@@ -49,35 +52,40 @@ export default memo(function FluidPortrait({
       cancelled = true;
       ro.disconnect();
       destroy?.();
-      setWebglOk(false);
     };
   }, [topSrc, bottomSrc]);
 
   return (
     <div
       ref={wrapRef}
-      className="fluid-portrait relative h-full w-full overflow-hidden"
+      className="fluid-portrait relative mx-auto"
+      style={portraitFrameStyle}
       aria-label={alt}
-      style={{
-        WebkitMaskImage:
-          "linear-gradient(to bottom, black 0%, black 85%, transparent 100%)",
-        maskImage:
-          "linear-gradient(to bottom, black 0%, black 85%, transparent 100%)",
-      }}
+      role="img"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={topSrc}
-        alt={alt}
-        className="absolute inset-0 h-full w-full object-contain object-bottom pointer-events-none transition-opacity duration-300"
-        style={{ opacity: webglOk ? 0 : 1 }}
-        draggable={false}
-      />
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 block h-full w-full touch-none"
-        aria-hidden={webglOk}
-      />
+      {/* Stage blur — overflow visible para não cortar expansão do desfoque */}
+      <div className="fluid-portrait__blur-stage pointer-events-none absolute inset-0">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={topSrc}
+          alt=""
+          aria-hidden
+          className="fluid-portrait__blur-bg"
+          style={portraitBlurBackgroundStyle}
+          draggable={false}
+        />
+      </div>
+
+      {/* Canvas nítido + máscara fluida — inalterado */}
+      <div className="fluid-portrait__canvas-stage pointer-events-none absolute inset-0">
+        <div className="fluid-portrait__theme-fade" aria-hidden />
+        <canvas
+          ref={canvasRef}
+          className="portrait-canvas absolute inset-0 z-[2] block h-full w-full touch-none"
+          style={portraitCanvasBodyFadeStyle}
+          aria-hidden
+        />
+      </div>
     </div>
   );
 });
