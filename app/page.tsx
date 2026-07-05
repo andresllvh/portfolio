@@ -215,7 +215,7 @@ export default function Home() {
             className="fixed inset-0 z-0 transition-opacity duration-300"
             style={{ opacity: showKeyboard ? 1 : 0, pointerEvents: showKeyboard ? "auto" : "none" }}
           >
-            <FrozenKeyboard />
+            <FrozenKeyboard interactive={showKeyboard} />
           </div>
         )}
 
