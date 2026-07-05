@@ -1,5 +1,5 @@
-/** Layout da camada reveal — portado de hero-mascara.js (Pedro). */
-export const BASE_IMAGE_RATIO = 768 / 1377;
+/** Layout da camada reveal — andre-real.png e mascara.png (571×1024). */
+export const BASE_IMAGE_RATIO = 571 / 1024;
 export const REVEAL_IMAGE_RATIO = 571 / 1024;
 
 /** Onde o topo do rosto começa na foto base (fração da altura da imagem). */
@@ -58,8 +58,9 @@ export function getRevealFrame(
   stageHeight: number,
   revealHeightRatio: number,
   topOffsetRatio = 0,
+  assetRatio: number = BASE_IMAGE_RATIO,
 ): RevealFrame {
-  const baseBox = getContainBox(stageWidth, stageHeight, BASE_IMAGE_RATIO);
+  const baseBox = getContainBox(stageWidth, stageHeight, assetRatio);
   const height = baseBox.height * revealHeightRatio;
   const width = height * REVEAL_IMAGE_RATIO;
   const left = baseBox.x + (baseBox.width - width) * 0.5;

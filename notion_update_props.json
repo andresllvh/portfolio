@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "fazer as 6 refeições": { "name": "refeições (meta 2215 kcal)" },
+    "academia": { "name": "treinar 🏋️" },
+    "trabalhar bem": { "name": "portfólio 3D (mexer)" },
+    "Projeto PMPB": { "name": "terminar portfólio" },
+    "leitura": { "name": "livro JavaScript" },
+    "rezar e agradecer": { "name": "ler Bíblia" },
+    "faculdade": { "name": "— faculdade (inativo)" },
+    "Escola Nuvem": { "name": "— Escola Nuvem (inativo)" },
+    "acordar cedo": { "name": "— acordar cedo (inativo)" }
+  }
+}

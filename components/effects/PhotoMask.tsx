@@ -3,11 +3,11 @@
 import { useRef, useLayoutEffect, useCallback, memo } from "react";
 import gsap from "gsap";
 import {
-  getRevealFrame,
-  REVEAL_HEIGHT_RATIO,
-  REVEAL_HEIGHT_RATIO_MOBILE,
-  REVEAL_HEIGHT_RATIO_TABLET,
-} from "@/lib/heroMaskLayout";
+  portraitBodyBlurStyle,
+  portraitImgStyle,
+  portraitLayerStyle,
+  portraitWrapMask,
+} from "@/lib/heroPortraitImage";
 
 interface PhotoMaskProps {
   normalSrc: string;
@@ -48,39 +48,6 @@ const TABLET_PARALLAX = 0.88;
 const MOBILE_PARALLAX = 0.72;
 const TABLET_BLOB = 0.9;
 const MOBILE_BLOB = 0.78;
-const TABLET_TOP_OFFSET = 0.006;
-const MOBILE_TOP_OFFSET = 0.012;
-
-const baseLayerStyle: React.CSSProperties = {
-  position: "absolute",
-  inset: 0,
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center bottom",
-  backgroundSize: "contain",
-  userSelect: "none",
-  pointerEvents: "none",
-};
-
-const revealLayerStyle: React.CSSProperties = {
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center bottom",
-  backgroundSize: "contain",
-  userSelect: "none",
-  pointerEvents: "none",
-};
-
-const EDGE_MASK: React.CSSProperties = {
-  WebkitMaskImage: [
-    "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
-    "linear-gradient(to bottom, black 0%, black 36%, transparent 68%)",
-  ].join(", "),
-  maskImage: [
-    "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
-    "linear-gradient(to bottom, black 0%, black 36%, transparent 68%)",
-  ].join(", "),
-  WebkitMaskComposite: "source-in",
-  maskComposite: "intersect",
-};
 
 type AutoBlob = {
   phaseX: number;
@@ -146,10 +113,32 @@ export default memo(function PhotoMask({
     reveal.classList.remove("is-mask-ready");
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     if (reduced) {
-      reveal.style.opacity = "0";
-      reveal.style.visibility = "hidden";
-      return;
+      reveal.style.opacity = "1";
+      reveal.style.visibility = "visible";
+      reveal.classList.add("is-mask-ready");
+
+      const onMoveReduced = (e: MouseEvent) => {
+        const p = updatePointer(e.clientX, e.clientY);
+        if (!p.inside || p.y! > stage.clientHeight * 0.58) {
+          reveal.style.maskImage = "none";
+          reveal.style.webkitMaskImage = "none";
+          return;
+        }
+        const mask = `radial-gradient(circle 110px at ${p.x!.toFixed(1)}px ${p.y!.toFixed(1)}px, black 35%, transparent 72%)`;
+        reveal.style.maskImage = mask;
+        reveal.style.webkitMaskImage = mask;
+      };
+
+      window.addEventListener("mousemove", onMoveReduced, { passive: true });
+      stage.addEventListener("pointermove", onMoveReduced, { passive: true });
+
+      return () => {
+        window.removeEventListener("mousemove", onMoveReduced);
+        stage.removeEventListener("pointermove", onMoveReduced);
+        reveal.classList.remove("is-mask-ready");
+      };
     }
 
     const mqDesktop = window.matchMedia("(min-width: 1024px)");
@@ -198,8 +187,6 @@ export default memo(function PhotoMask({
     let parallaxStrength = PARALLAX;
     let blobSize = 140;
     let wobbleR = blobSize * 0.35;
-    let revealHeightRatio = REVEAL_HEIGHT_RATIO;
-    let revealTopOffset = 0;
     let ratioTx = 0;
     let ratioTy = 0;
     let mouseTx = 0;
@@ -256,30 +243,17 @@ export default memo(function PhotoMask({
     }
 
     const syncRevealFrame = () => {
-      const rect = stage.getBoundingClientRect();
       if (mqDesktop.matches) {
-        revealHeightRatio = REVEAL_HEIGHT_RATIO;
-        revealTopOffset = 0;
         parallaxStrength = PARALLAX;
       } else if (mqTablet.matches) {
-        revealHeightRatio = REVEAL_HEIGHT_RATIO_TABLET;
-        revealTopOffset = TABLET_TOP_OFFSET;
         parallaxStrength = PARALLAX * TABLET_PARALLAX;
       } else {
-        revealHeightRatio = REVEAL_HEIGHT_RATIO_MOBILE;
-        revealTopOffset = MOBILE_TOP_OFFSET;
         parallaxStrength = PARALLAX * MOBILE_PARALLAX;
       }
-
-      const frame = getRevealFrame(rect.width, rect.height, revealHeightRatio, revealTopOffset);
-      reveal.style.setProperty("--reveal-width", `${frame.width}px`);
-      reveal.style.setProperty("--reveal-height", `${frame.height}px`);
-      reveal.style.setProperty("--reveal-left", `${frame.left}px`);
-      reveal.style.setProperty("--reveal-top", `${frame.top}px`);
     };
 
     const syncBlobScale = () => {
-      const r = reveal.getBoundingClientRect();
+      const r = stage.getBoundingClientRect();
       const ref = Math.max(1, Math.min(r.width, r.height));
       let factor = 1;
       if (!mqDesktop.matches) factor = mqTablet.matches ? TABLET_BLOB : MOBILE_BLOB;
@@ -301,8 +275,8 @@ export default memo(function PhotoMask({
     };
 
     const syncMaskExtents = () => {
-      const w = Math.max(1, Math.ceil(reveal.getBoundingClientRect().width));
-      const h = Math.max(1, Math.ceil(reveal.getBoundingClientRect().height));
+      const w = Math.max(1, Math.ceil(stage.getBoundingClientRect().width));
+      const h = Math.max(1, Math.ceil(stage.getBoundingClientRect().height));
       maskEl.setAttribute("x", "0");
       maskEl.setAttribute("y", "0");
       maskEl.setAttribute("width", String(w));
@@ -354,8 +328,11 @@ export default memo(function PhotoMask({
       }
 
       const rs = ratioSpring.step(ratioTx, ratioTy, dt);
-      gsap.set(base, { x: rs.x * parallaxStrength, y: rs.y * parallaxStrength, force3D: true });
-      gsap.set(reveal, { x: rs.x * parallaxStrength * 2, y: rs.y * parallaxStrength * 2, force3D: true });
+      gsap.set([base, reveal], {
+        x: rs.x * parallaxStrength,
+        y: rs.y * parallaxStrength,
+        force3D: true,
+      });
 
       const headP = head.step(mouseTx, mouseTy, dt);
       const b1 = body1.step(mouseTx, mouseTy, dt);
@@ -508,10 +485,19 @@ export default memo(function PhotoMask({
   return (
     <div
       ref={stageRef}
-      className="relative h-full w-full cursor-pointer overflow-hidden"
-      style={{ pointerEvents: "auto" }}
+      className="relative mx-auto h-full w-full max-w-[760px] cursor-crosshair overflow-hidden"
+      style={{ pointerEvents: "auto", ...portraitWrapMask }}
       aria-label={alt}
     >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 70% at 50% 32%, color-mix(in srgb, var(--aurora-1) 28%, transparent), transparent 72%)",
+        }}
+      />
+
       <svg
         aria-hidden
         className="pointer-events-none absolute h-0 w-0 overflow-hidden"
@@ -554,26 +540,27 @@ export default memo(function PhotoMask({
 
       <div
         ref={baseRef}
-        className="absolute inset-0 z-[1]"
-        style={{
-          ...EDGE_MASK,
-          ...baseLayerStyle,
-          backgroundImage: `url(${normalSrc})`,
-        }}
-      />
+        className="absolute inset-0 z-[1] overflow-hidden"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={normalSrc}
+          alt=""
+          aria-hidden
+          style={portraitBodyBlurStyle}
+          draggable={false}
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={normalSrc} alt={alt} style={portraitLayerStyle} draggable={false} />
+      </div>
 
       <div
         ref={revealRef}
-        className="photo-mask__reveal pointer-events-none absolute z-[2]"
-        style={{
-          ...revealLayerStyle,
-          backgroundImage: `url(${spiderSrc})`,
-          top: "var(--reveal-top, 0)",
-          left: "var(--reveal-left, 0)",
-          width: "var(--reveal-width, 100%)",
-          height: "var(--reveal-height, 100%)",
-        }}
-      />
+        className="photo-mask__reveal pointer-events-none absolute inset-0 z-[2] overflow-hidden"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={spiderSrc} alt="" aria-hidden style={portraitImgStyle} draggable={false} />
+      </div>
     </div>
   );
 });
