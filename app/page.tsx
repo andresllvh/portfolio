@@ -278,7 +278,7 @@ export default function Home() {
             <SeasonPicker />
             <span className="hidden md:inline-flex">
             <a
-              href="https://github.com/andresllvh/3d-portfolio"
+              href="https://github.com/andresllvh/portfolio"
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="hover"

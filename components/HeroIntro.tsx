@@ -3,6 +3,7 @@ import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import FluidPortrait from "@/components/effects/FluidPortrait";
 import { PORTRAIT_FRAME_HEIGHT } from "@/lib/heroPortraitImage";
+import { useLanguage } from "@/components/LanguageProvider";
 
 const PORTRAIT_SRC = "/images/andre-real.png";
 const PORTRAIT_MASK_SRC = "/images/mascara.png";
@@ -12,6 +13,7 @@ const MONO: React.CSSProperties = {
 };
 
 export default function HeroIntro() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const photoWrapRef = useRef<HTMLDivElement>(null);
 
@@ -79,7 +81,7 @@ export default function HeroIntro() {
             maxWidth: "88vw",
           }}
         >
-          passe o mouse sobre o rosto para revelar
+          {t("hero.hoverHint")}
         </motion.div>
 
         {/* Retrato fluido — canvas WebGL revela a máscara dev no hover */}
@@ -128,7 +130,7 @@ export default function HeroIntro() {
           >
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 6px #4ade80", flexShrink: 0 }} />
             <span style={{ ...MONO, fontSize: 9, letterSpacing: "0.3em", color: "var(--ice-300)", textTransform: "uppercase" }}>
-              aberto a oportunidades
+              {t("header.availability")}
             </span>
           </motion.div>
 
@@ -169,13 +171,13 @@ export default function HeroIntro() {
             pointerEvents: "none", zIndex: 4,
           }}
         >
-          <span style={{ ...MONO, fontSize: "clamp(8px, 2.2vw, 9px)", letterSpacing: "clamp(0.1em, 1vw, 0.3em)", color: "var(--ice-300)", opacity: 0.55, textTransform: "uppercase", whiteSpace: "nowrap" }}>
-            role para ver o portfólio
+          <span style={{ ...MONO, fontSize: "clamp(9px, 2.6vw, 11px)", letterSpacing: "clamp(0.1em, 1vw, 0.3em)", color: "var(--ice-200)", opacity: 0.85, textTransform: "uppercase", whiteSpace: "nowrap" }}>
+            {t("hero.dragHint")}
           </span>
           <motion.div
-            animate={{ y: [0, 8, 0] }}
+            animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ width: 1, height: 32, background: "linear-gradient(to bottom, var(--ice-500), transparent)" }}
+            style={{ width: 1, height: 36, background: "linear-gradient(to bottom, var(--ice-400), transparent)" }}
           />
         </motion.div>
 

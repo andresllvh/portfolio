@@ -55,6 +55,14 @@ export const DICT = {
       pt: "· passe o mouse nas teclas",
       en: "· hover over the keys",
     },
+    hoverHint: {
+      pt: "passe o mouse sobre o rosto para revelar",
+      en: "hover over the face to reveal",
+    },
+    dragHint: {
+      pt: "arraste para baixo para ver o portfólio",
+      en: "drag down to see the portfolio",
+    },
   },
   stack: {
     title: { pt: "Tech Stack", en: "Tech Stack" },
