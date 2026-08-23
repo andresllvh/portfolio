@@ -26,7 +26,7 @@ type Localised = { pt: string; en: string };
 
 type Project = ProjectDetail & {
   align: "left" | "right";
-  section: "project1" | "project2";
+  section: "project1" | "project2" | "project3";
 };
 
 const projects: Project[] = [
@@ -93,6 +93,35 @@ const projects: Project[] = [
     badge: { pt: "Confidencial", en: "Confidential" },
     align: "right",
     section: "project2",
+  },
+  {
+    num: "03",
+    name: {
+      pt: "Capa de Invisibilidade AI",
+      en: "AI Invisibility Cloak",
+    },
+    stack: [
+      "Python",
+      "MediaPipe",
+      "OpenCV",
+      "Computer Vision",
+      "Machine Learning",
+      "HTML5 / Canvas",
+    ],
+    desc: {
+      pt: "Aplicação em tempo real de visão computacional e Machine Learning que torna o usuário invisível através de gestos da mão.",
+      en: "Real-time Computer Vision and Machine Learning application making the user invisible controlled by hand gestures.",
+    },
+    details: {
+      pt: "Sistema de visão computacional em tempo real desenvolvido em Python que utiliza MediaPipe HandLandmarker para rastrear 21 pontos 3D da mão e classificar gestos (mão aberta para ativar a invisibilidade, mão fechada para reaparecer). Integração com MediaPipe SelfieSegmentation para recorte corporal e substituição por imagem de fundo.\n\nConstruído com arquitetura modular (InvisibilityEngine, PersonDetector, HandStateClassifier, KeepState debouncer) com interface desktop Tkinter/OpenCV e uma versão web interativa em HTML5/Canvas.",
+      en: "Real-time computer vision system built in Python using MediaPipe HandLandmarker to track 21 3D hand joints and classify gestures (open hand for invisibility, closed fist to reappear). Integrated with MediaPipe SelfieSegmentation for dynamic body masking and background replacement.\n\nBuilt with a modular architecture (InvisibilityEngine, PersonDetector, HandStateClassifier, KeepState debouncer) featuring a Tkinter/OpenCV desktop app and an interactive HTML5/Canvas web demo.",
+    },
+    github: "https://github.com/andresllvh/hand-invisibility-cloak",
+    media: [],
+    highlights: ["python", "git"],
+    badge: { pt: "Open Source", en: "Open Source" },
+    align: "left",
+    section: "project3",
   },
 ];
 
