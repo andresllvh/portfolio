@@ -117,7 +117,10 @@ const projects: Project[] = [
       en: "Real-time computer vision system built in Python using MediaPipe HandLandmarker to track 21 3D hand joints and classify gestures (open hand for invisibility, closed fist to reappear). Integrated with MediaPipe SelfieSegmentation for dynamic body masking and background replacement.\n\nBuilt with a modular architecture (InvisibilityEngine, PersonDetector, HandStateClassifier, KeepState debouncer) featuring a Tkinter/OpenCV desktop app and an interactive HTML5/Canvas web demo.",
     },
     github: "https://github.com/andresllvh/hand-invisibility-cloak",
-    media: [],
+    media: [
+      "/projects/hand-invisibility-cloak/01-invisible.png",
+      "/projects/hand-invisibility-cloak/02-visible.png",
+    ],
     highlights: ["python", "git"],
     badge: { pt: "Open Source", en: "Open Source" },
     align: "left",
