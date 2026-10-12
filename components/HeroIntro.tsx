@@ -2,6 +2,7 @@
 import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import FluidPortrait from "@/components/effects/FluidPortrait";
+import HeroLines from "@/components/effects/HeroLines";
 import { PORTRAIT_FRAME_HEIGHT } from "@/lib/heroPortraitImage";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -64,6 +65,9 @@ export default function HeroIntro() {
           transition: "background 600ms ease",
         }}
       >
+        {/* Linhas de fundo, as mesmas do resto do site, atrás do retrato */}
+        <HeroLines />
+
         {/* hint */}
         <motion.div
           style={{
@@ -92,6 +96,7 @@ export default function HeroIntro() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            zIndex: 1,
           }}
         >
           <div ref={photoWrapRef} style={{ pointerEvents: "auto" }}>
