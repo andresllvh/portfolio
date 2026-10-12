@@ -143,7 +143,7 @@ const experiences: Array<{
       en: "Full Stack Developer / Process & Automation Assistant",
     },
     company: "Bloco Construções S.A.",
-    period: { pt: "Jan/2026 — Atual", en: "Jan/2026 — Present" },
+    period: { pt: "Jun/2026 — Atual", en: "Jun/2026 — Present" },
     location: { pt: "João Pessoa, Brasil", en: "João Pessoa, Brazil" },
     summary: {
       pt: "Atuação no desenvolvimento, evolução e manutenção de sistemas corporativos voltados para Recursos Humanos, Suprimentos e Processos Internos. Participação na implementação de novas funcionalidades, integrações entre sistemas, auditorias de segurança, automações e melhorias contínuas, utilizando tecnologias modernas e boas práticas de desenvolvimento.",
@@ -179,7 +179,7 @@ const experiences: Array<{
   {
     role: { pt: "Suporte Técnico", en: "Technical Support" },
     company: "Fácil Tecnologia",
-    period: { pt: "Out/2025 — Presente", en: "Oct/2025 — Present" },
+    period: { pt: "Out/2025 — Jun/2026", en: "Oct/2025 — Jun/2026" },
     location: { pt: "João Pessoa, Brasil", en: "João Pessoa, Brazil" },
     summary: {
       pt: "Atendimento técnico via Zendesk (chat, e-mail e telefone) para usuários do Sistema Fácil, utilizado por órgãos públicos, servidores e consignatárias. Análise e resolução de incidentes, diagnóstico de falhas sistêmicas e acompanhamento de demandas junto às equipes responsáveis.",
