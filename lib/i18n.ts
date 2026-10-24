@@ -81,6 +81,8 @@ export const DICT = {
       pt: "Minha trajetória profissional.",
       en: "My professional journey.",
     },
+    certifications: { pt: "Certificações", en: "Certifications" },
+    credential: { pt: "Ver credencial", en: "View credential" },
   },
   projects: {
     kicker: { pt: "projeto", en: "project" },

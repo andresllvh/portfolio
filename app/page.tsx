@@ -228,6 +228,32 @@ const experiences: Array<{
   },
 ];
 
+const certifications: Array<{
+  name: string;
+  issuer: string;
+  issued: Localised;
+  url: string;
+}> = [
+  {
+    name: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services",
+    issued: {
+      pt: "Out/2026 · válida até Out/2029",
+      en: "Oct/2026 · valid until Oct/2029",
+    },
+    url: "https://www.credly.com/badges/bfe482f2-8501-4e6f-80ff-fc82ae5f2998",
+  },
+  {
+    name: "AWS re/Start Graduate",
+    issuer: "Amazon Web Services · Escola da Nuvem",
+    issued: {
+      pt: "Fev/2026 · 270 h de Cloud Computing",
+      en: "Feb/2026 · 270-hour Cloud Computing program",
+    },
+    url: "https://www.credly.com/badges/08fd3b38-b129-47bd-97e9-4e951746be27",
+  },
+];
+
 function pick<T>(loc: { pt: T; en: T }, lang: Lang): T {
   return loc[lang];
 }
@@ -361,6 +387,17 @@ export default function Home() {
                 <br />
                 {t("hero.tagline")}
               </p>
+              <a
+                href={certifications[0].url}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="hover"
+                className="frost-chip mt-5 gap-2 pointer-events-auto fade-in-up"
+                style={{ ["--d" as string]: "600ms" }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-ice-400" aria-hidden />
+                {certifications[0].name}
+              </a>
 
               {/* CTAs */}
               <div
@@ -579,6 +616,44 @@ export default function Home() {
                   </div>
                 </Reveal>
               ))}
+
+              <Reveal
+                delay={experiences.length * 120}
+                as="article"
+                className="relative rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 md:p-10 pointer-events-auto shadow-[0_8px_40px_-20px_rgba(0,0,0,0.6)]"
+              >
+                <h3 className="text-2xl sm:text-3xl font-bold text-ice-50 tracking-tight mb-5">
+                  {t("experience.certifications")}
+                </h3>
+                <ul className="space-y-4">
+                  {certifications.map((c) => (
+                    <li
+                      key={c.name}
+                      className="flex flex-wrap items-start justify-between gap-3"
+                    >
+                      <div>
+                        <p className="text-ice-50 font-semibold">{c.name}</p>
+                        <p className="text-ice-400 text-sm mt-0.5">
+                          {c.issuer}
+                          <span className="text-ice-500/80">
+                            {" · "}
+                            {pick(c.issued, lang)}
+                          </span>
+                        </p>
+                      </div>
+                      <a
+                        href={c.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-cursor="hover"
+                        className="frost-chip"
+                      >
+                        {t("experience.credential")}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
             </div>
           </section>
 

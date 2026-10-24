@@ -27,7 +27,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "André Santos — Frontend Developer",
   description:
-    "Portfólio de André Santos — Frontend Developer especializado em React, TypeScript e Cloud Computing. João Pessoa, PB.",
+    "Portfólio de André Santos — Frontend Developer especializado em React, TypeScript e Cloud Computing. AWS Certified Cloud Practitioner. João Pessoa, PB.",
   authors: [{ name: "André Santos" }],
   openGraph: {
     title: "André Santos — Frontend Developer",
