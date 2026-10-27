@@ -25,11 +25,27 @@ const securityHeaders = [
   },
 ];
 
+const OLD_HOSTS = [
+  "portfolio-tan-six-bcjn1gwug5.vercel.app",
+  "portfolio-tan-six.vercel.app",
+];
+
 const nextConfig: NextConfig = {
   // Emits a minimal server bundle at `.next/standalone/` so the Docker
   // runtime image can drop npm/node_modules entirely and just run
   // `node server.js`. Trims the final image to ~100 MB.
   output: "standalone",
+
+  // Older addresses of this same site (still linked from resumes already
+  // sent) permanently redirect to the current one.
+  async redirects() {
+    return OLD_HOSTS.map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host" as const, value: host }],
+      destination: "https://portfolioandresllvh.vercel.app/:path*",
+      permanent: true,
+    }));
+  },
 
   async headers() {
     return [
