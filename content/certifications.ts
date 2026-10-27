@@ -20,4 +20,24 @@ export const certifications: Certification[] = [
     },
     url: "https://www.credly.com/badges/08fd3b38-b129-47bd-97e9-4e951746be27",
   },
+  {
+    name: "AWS Knowledge: Migration Foundations",
+    issuer: "Amazon Web Services",
+    issued: {
+      pt: "Out/2026 · badge de conhecimento",
+      en: "Oct/2026 · knowledge badge",
+    },
+    url: "https://www.credly.com/badges/8d2c3ad7-85e9-473a-9709-66408203b74d",
+  },
+  {
+    name: "Cloud Fundamentals – SMBs",
+    issuer: "TIDWIT · powered by AWS",
+    issued: { pt: "Abr/2026", en: "Apr/2026" },
+  },
+  {
+    name: "Foundations: Data, Data, Everywhere",
+    issuer: "Google · Coursera",
+    issued: { pt: "Dez/2025", en: "Dec/2025" },
+    url: "https://coursera.org/verify/N8RZGV1O2F23",
+  },
 ];

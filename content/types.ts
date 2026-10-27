@@ -47,5 +47,7 @@ export type Certification = {
   name: string;
   issuer: string;
   issued: Localised;
-  url: string;
+  // Public verification page (Credly, Coursera). Some issuers only hand out
+  // the badge file, so the link is optional.
+  url?: string;
 };

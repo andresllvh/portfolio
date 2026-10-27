@@ -68,9 +68,20 @@ describe("experiences", () => {
 });
 
 describe("certifications", () => {
-  it("link to a Credly credential", () => {
+  it("open with the Credly badge shown in the hero", () => {
+    expect(certifications[0].url).toMatch(/^https:\/\/www\.credly\.com\/badges\//);
+  });
+
+  it("only link to a verification page over https", () => {
+    for (const c of certifications.filter((c) => c.url)) {
+      expect(c.url, c.name).toMatch(/^https:\/\/(www\.credly\.com\/badges|coursera\.org\/verify)\//);
+    }
+  });
+
+  it("have the issue date in both languages", () => {
     for (const c of certifications) {
-      expect(c.url).toMatch(/^https:\/\/www\.credly\.com\/badges\//);
+      expect(c.issued.pt.trim(), c.name).not.toBe("");
+      expect(c.issued.en.trim(), c.name).not.toBe("");
     }
   });
 });

@@ -102,15 +102,17 @@ export default function ExperienceSection() {
                     </span>
                   </p>
                 </div>
-                <a
-                  href={c.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-cursor="hover"
-                  className="frost-chip"
-                >
-                  {t("experience.credential")}
-                </a>
+                {c.url && (
+                  <a
+                    href={c.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="hover"
+                    className="frost-chip"
+                  >
+                    {t("experience.credential")}
+                  </a>
+                )}
               </li>
             ))}
           </ul>

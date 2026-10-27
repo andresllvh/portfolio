@@ -34,8 +34,8 @@ export function personJsonLd() {
       "@type": "EducationalOccupationalCredential",
       name: c.name,
       credentialCategory: "certification",
-      url: c.url,
-      recognizedBy: { "@type": "Organization", name: "Amazon Web Services" },
+      ...(c.url && { url: c.url }),
+      recognizedBy: { "@type": "Organization", name: c.issuer.split(" · ")[0] },
     })),
   };
 }
