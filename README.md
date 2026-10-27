@@ -2,7 +2,7 @@
 
 Portfólio interativo de **André Laureano dos Santos Silva**, desenvolvedor Front-End Júnior e AWS Certified Cloud Practitioner, de João Pessoa (PB).
 
-**[Ver o portfólio](https://portfolio-cmfb.vercel.app)** &nbsp;|&nbsp; [LinkedIn](https://www.linkedin.com/in/andr%C3%A9-santooss/) &nbsp;|&nbsp; [GitHub](https://github.com/andresllvh)
+**[Ver o portfólio](https://portfolioandresllvh.vercel.app)** &nbsp;|&nbsp; [LinkedIn](https://www.linkedin.com/in/andr%C3%A9-santooss/) &nbsp;|&nbsp; [GitHub](https://github.com/andresllvh)
 
 ## O que tem no site
 
@@ -44,15 +44,32 @@ Depois, acesse [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Gera a versão de produção |
 | `npm start` | Serve a versão de produção |
 | `npm run lint` | Analisa o código com o ESLint |
+| `npm run typecheck` | Verifica os tipos com o TypeScript |
+| `npm test` | Testes de unidade (Vitest) do conteúdo e das traduções |
+| `npm run test:e2e` | Testes de ponta a ponta (Playwright) no desktop e no celular, depois do `build` |
 
-## Estrutura
+## Arquitetura
+
+O código é organizado em camadas, para que o conteúdo possa mudar sem mexer na interface:
 
 ```
-app/          # Página, layout, metadados e imagem de prévia do link
-components/   # Teclado 3D, hero, modal de projetos, navegação e efeitos
-lib/          # Textos em PT/EN, temas, ícones do teclado e utilitários
-public/       # Currículos em PDF, imagens dos projetos e retrato
+content/              # Camada de dados: perfil, projetos, experiências, certificações e SEO (JSON-LD)
+components/sections/  # Camada de apresentação: uma seção da página por arquivo
+components/           # Componentes reutilizáveis: teclado 3D, modal, ícones, efeitos
+lib/                  # Textos em PT/EN, temas, ícones do teclado e hooks
+app/                  # Composição: página, layout, metadados, 404, erro, robots e sitemap
+tests/                # Testes de unidade (Vitest)
+e2e/                  # Testes de ponta a ponta (Playwright)
 ```
+
+Para adicionar um projeto, basta incluir um item em `content/projects.ts` e as imagens em `public/projects/`. Os testes conferem se as imagens existem e se os textos estão nos dois idiomas.
+
+## Qualidade
+
+- **CI no GitHub Actions:** a cada push rodam lint, checagem de tipos, testes de unidade, build e testes de ponta a ponta.
+- **Desempenho:** o teclado 3D (three.js) é carregado em um pacote separado, só depois que o navegador fica ocioso; no celular, uma silhueta ocupa o lugar enquanto ele carrega.
+- **Acessibilidade:** respeita a opção do sistema de reduzir movimento (sem intro e com o teclado parado).
+- **SEO:** `robots.txt`, `sitemap.xml`, imagem de prévia do link e dados estruturados (schema.org `Person`).
 
 ## Créditos
 

@@ -61,3 +61,7 @@ cv_opcion_b_en.pdf
 
 # Conversation context / personal notes
 CONVERSATION_CONTEXT.txt
+
+# Playwright
+/test-results/
+/playwright-report/
