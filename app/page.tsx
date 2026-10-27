@@ -334,7 +334,10 @@ export default function Home() {
 
   return (
     <>
-      <HeroIntro />
+      {/* Phones skip the scroll-driven photo intro and land straight on the
+          hero (name, role and CTAs). The CSS class hides it before hydration,
+          and the isMobile check keeps its WebGL canvas from mounting. */}
+      <div className="hidden md:block">{!isMobile && <HeroIntro />}</div>
       <div id="portfolio-3d">
       <SmoothScroll>
       <div className="relative">
@@ -403,7 +406,7 @@ export default function Home() {
             )}
             <div className="mt-2 md:mt-20">
               <p
-                className="text-[11px] uppercase tracking-[0.3em] text-ice-300 mb-5 fade-in-up"
+                className="text-xs uppercase tracking-[0.25em] text-ice-200 mb-5 fade-in-up"
                 style={{ ["--d" as string]: "0ms" }}
               >
                 {t("hero.greeting")}
@@ -426,10 +429,12 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="hover"
-                className="frost-chip mt-5 gap-2 pointer-events-auto fade-in-up"
+                className="frost-chip frost-chip--cert mt-5 gap-2 pointer-events-auto fade-in-up"
                 style={{ ["--d" as string]: "600ms" }}
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-ice-400" aria-hidden />
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="#FF9900" aria-hidden>
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                </svg>
                 {certifications[0].name}
               </a>
 
@@ -509,7 +514,7 @@ export default function Home() {
                 <span>{t("hero.scroll")}</span>
                 <span className="scroll-indicator__rail" />
               </span>
-              <span className="text-[11px] uppercase tracking-[0.25em] text-ice-400 hidden sm:inline">
+              <span className="text-xs uppercase tracking-[0.2em] text-ice-300 hidden sm:inline">
                 {t("hero.keysHint")}
               </span>
             </div>

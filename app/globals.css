@@ -193,6 +193,28 @@ body.header-scrolled .lang-picker-btn {
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
 }
 
+/* On phones the header buttons used to float over the content below them.
+   Once the page scrolls, the header becomes a solid frosted bar, so content
+   passes underneath, and the name stays visible inside it. */
+@media (max-width: 767px) {
+  .site-header {
+    transition: background-color 0.24s ease, padding 0.24s ease;
+  }
+  body.header-scrolled .site-header {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    background: color-mix(in srgb, var(--ink-1) 85%, transparent);
+    backdrop-filter: blur(12px) saturate(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+    border-bottom: 1px solid color-mix(in srgb, var(--ice-400) 16%, transparent);
+  }
+  html body.header-hide-logo .site-header__brand .site-header__name {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
 body.header-hide-logo .site-header__brand .site-header__name,
 body.header-hide-logo .site-header__brand .status-pill {
   opacity: 0;
@@ -472,6 +494,15 @@ body.header-hide-logo .site-header__brand .status-pill {
   transition: transform 220ms ease, border-color 220ms ease,
     color 220ms ease, background 220ms ease;
 }
+/* Larger chip for the certification badge in the hero: it is a key
+   credential, so it reads as content rather than a footnote. */
+.frost-chip--cert {
+  font-size: 0.8125rem;
+  padding: 0.45rem 0.9rem;
+  color: var(--ice-50);
+  border-color: color-mix(in srgb, #ff9900 45%, transparent);
+}
+
 .frost-chip:hover {
   transform: translateY(-1px);
   border-color: rgba(207, 224, 242, 0.55);
@@ -543,10 +574,10 @@ body.header-hide-logo .site-header__brand .status-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.25em;
-  color: var(--ice-300);
+  letter-spacing: 0.2em;
+  color: var(--ice-200);
 }
 .scroll-indicator__rail {
   position: relative;

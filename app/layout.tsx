@@ -26,12 +26,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio-cmfb.vercel.app"),
-  title: "André Santos — Frontend Developer",
+  title: "André Santos — Desenvolvedor Front-End Jr",
   description:
-    "Portfólio de André Santos — Frontend Developer especializado em React, TypeScript e Cloud Computing. AWS Certified Cloud Practitioner. João Pessoa, PB.",
+    "Portfólio de André Santos, desenvolvedor Front-End Júnior especializado em React, TypeScript e Cloud Computing. AWS Certified Cloud Practitioner. João Pessoa, PB.",
   authors: [{ name: "André Santos" }],
   openGraph: {
-    title: "André Santos — Frontend Developer",
+    title: "André Santos — Desenvolvedor Front-End Jr",
     description:
       "Portfólio interativo de André Santos, desenvolvedor Front-End. React, Next.js, TypeScript e AWS Certified Cloud Practitioner.",
     type: "website",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "André Santos — Frontend Developer",
+    title: "André Santos — Desenvolvedor Front-End Jr",
     description:
       "Portfólio interativo de André Santos, desenvolvedor Front-End. React, Next.js, TypeScript e AWS Certified Cloud Practitioner.",
   },

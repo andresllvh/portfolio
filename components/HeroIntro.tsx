@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useSyncExternalStore } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import FluidPortrait from "@/components/effects/FluidPortrait";
 import HeroLines from "@/components/effects/HeroLines";
@@ -13,8 +13,21 @@ const MONO: React.CSSProperties = {
   fontFamily: "'SF Mono', 'Courier New', monospace",
 };
 
+// Touch screens (tablets) have no hover, so the reveal hint asks for a tap.
+const NO_HOVER = "(hover: none)";
+function subscribeNoHover(callback: () => void) {
+  const mql = window.matchMedia(NO_HOVER);
+  mql.addEventListener("change", callback);
+  return () => mql.removeEventListener("change", callback);
+}
+
 export default function HeroIntro() {
   const { t } = useLanguage();
+  const isTouch = useSyncExternalStore(
+    subscribeNoHover,
+    () => window.matchMedia(NO_HOVER).matches,
+    () => false
+  );
   const containerRef = useRef<HTMLDivElement>(null);
   const photoWrapRef = useRef<HTMLDivElement>(null);
 
@@ -77,15 +90,15 @@ export default function HeroIntro() {
             zIndex: 15,
             pointerEvents: "none",
             ...MONO,
-            fontSize: "clamp(10px, 3vw, 13px)",
-            letterSpacing: "clamp(0.12em, 1.2vw, 0.35em)",
-            color: "var(--ice-300)",
+            fontSize: "clamp(12px, 3.2vw, 14px)",
+            letterSpacing: "clamp(0.08em, 0.8vw, 0.25em)",
+            color: "var(--ice-200)",
             textTransform: "uppercase",
             textAlign: "center",
             maxWidth: "88vw",
           }}
         >
-          {t("hero.hoverHint")}
+          {t(isTouch ? "hero.touchHint" : "hero.hoverHint")}
         </motion.div>
 
         {/* Retrato fluido — canvas WebGL revela a máscara dev no hover */}
@@ -134,7 +147,7 @@ export default function HeroIntro() {
             }}
           >
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 6px #4ade80", flexShrink: 0 }} />
-            <span style={{ ...MONO, fontSize: 9, letterSpacing: "0.3em", color: "var(--ice-300)", textTransform: "uppercase" }}>
+            <span style={{ ...MONO, fontSize: 11, letterSpacing: "0.2em", color: "var(--ice-200)", textTransform: "uppercase" }}>
               {t("header.availability")}
             </span>
           </motion.div>
@@ -157,11 +170,11 @@ export default function HeroIntro() {
           <motion.div style={{ opacity: roleOp, y: roleY, display: "flex", alignItems: "center", gap: 12, justifyContent: "center" }}>
             <div style={{ width: 32, height: 1, background: "var(--ice-500)" }} />
             <span style={{
-              ...MONO, fontSize: 11, letterSpacing: "0.3em",
-              color: "var(--ice-400)", textShadow: "0 0 14px color-mix(in srgb, var(--ice-400) 50%, transparent)",
+              ...MONO, fontSize: 13, letterSpacing: "0.25em",
+              color: "var(--ice-300)", textShadow: "0 0 14px color-mix(in srgb, var(--ice-400) 50%, transparent)",
               textTransform: "uppercase",
             }}>
-              Developer
+              {t("hero.introRole")}
             </span>
             <div style={{ width: 32, height: 1, background: "var(--ice-500)" }} />
           </motion.div>
@@ -176,7 +189,7 @@ export default function HeroIntro() {
             pointerEvents: "none", zIndex: 4,
           }}
         >
-          <span style={{ ...MONO, fontSize: "clamp(9px, 2.6vw, 11px)", letterSpacing: "clamp(0.1em, 1vw, 0.3em)", color: "var(--ice-200)", opacity: 0.85, textTransform: "uppercase", whiteSpace: "nowrap" }}>
+          <span style={{ ...MONO, fontSize: "clamp(12px, 2.8vw, 13px)", letterSpacing: "clamp(0.06em, 0.6vw, 0.2em)", color: "var(--ice-200)", textTransform: "uppercase", whiteSpace: "nowrap" }}>
             {t("hero.dragHint")}
           </span>
           <motion.div

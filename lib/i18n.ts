@@ -41,8 +41,12 @@ export const DICT = {
   hero: {
     greeting: { pt: "Olá, sou", en: "Hi, I am" },
     roleLine: {
-      pt: "Frontend Developer.",
-      en: "Frontend Developer.",
+      pt: "Desenvolvedor Front-End Jr.",
+      en: "Junior Front-End Developer.",
+    },
+    introRole: {
+      pt: "Desenvolvedor Front-End",
+      en: "Front-End Developer",
     },
     tagline: {
       pt: "Especializado em React, TypeScript e Cloud Computing.",
@@ -58,6 +62,10 @@ export const DICT = {
     hoverHint: {
       pt: "passe o mouse sobre o rosto para revelar",
       en: "hover over the face to reveal",
+    },
+    touchHint: {
+      pt: "toque no rosto para revelar",
+      en: "tap the face to reveal",
     },
     dragHint: {
       pt: "arraste para baixo para ver o portfólio",
@@ -128,9 +136,9 @@ export const DICT = {
         pt: "O detalhe que separa o bom do bonito.",
         en: "What separates good from beautiful.",
       },
-      tailwindcss: {
-        pt: "Utility-first. Design dentro do HTML.",
-        en: "Utility-first. Design inside the HTML.",
+      sass: {
+        pt: "CSS com variáveis, mixins e organização.",
+        en: "CSS with variables, mixins and structure.",
       },
       python: {
         pt: "Lê como inglês, escala como foguete.",
@@ -144,33 +152,33 @@ export const DICT = {
         pt: "React adulto: routing, SSR, edge.",
         en: "React all grown up: routing, SSR, edge.",
       },
-      vuedotjs: {
-        pt: "O frontend mais tranquilo.",
-        en: "The most relaxed frontend.",
-      },
       nodedotjs: {
         pt: "JavaScript no servidor.",
         en: "JavaScript on the server.",
       },
-      php: {
-        pt: "Roda mais da web do que você imagina.",
-        en: "Runs more of the web than you think.",
-      },
-      odoo: {
-        pt: "ERP que não faz chorar.",
-        en: "ERP that doesn't make you cry.",
+      vite: {
+        pt: "Servidor de desenvolvimento que abre na hora.",
+        en: "A dev server that starts in an instant.",
       },
       postgresql: {
         pt: "O banco de dados chato que sempre funciona.",
         en: "The boring database that always works.",
       },
-      docker: {
-        pt: "Igual na minha máquina, igual em produção.",
-        en: "Same on my machine, same in production.",
+      supabase: {
+        pt: "PostgreSQL com autenticação, RLS e Edge Functions.",
+        en: "PostgreSQL with auth, RLS and Edge Functions.",
+      },
+      aws: {
+        pt: "Nuvem com certificação: Cloud Practitioner.",
+        en: "Cloud, certified: Cloud Practitioner.",
       },
       git: {
         pt: "Histórico e máquina do tempo do código.",
         en: "History and a time machine for your code.",
+      },
+      vitest: {
+        pt: "Testes rápidos para o que não pode quebrar.",
+        en: "Fast tests for what can't break.",
       },
     },
   },
