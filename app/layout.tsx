@@ -25,6 +25,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portfolio-cmfb.vercel.app"),
   title: "André Santos — Frontend Developer",
   description:
     "Portfólio de André Santos — Frontend Developer especializado em React, TypeScript e Cloud Computing. AWS Certified Cloud Practitioner. João Pessoa, PB.",
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "André Santos — Frontend Developer",
     description:
-      "Portfólio interativo com efeitos 3D. React, TypeScript, Next.js, Firebase.",
+      "Portfólio interativo de André Santos, desenvolvedor Front-End. React, Next.js, TypeScript e AWS Certified Cloud Practitioner.",
     type: "website",
     locale: "pt_BR",
   },
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "André Santos — Frontend Developer",
     description:
-      "Portfólio interativo com efeitos 3D. React, TypeScript, Next.js, Firebase.",
+      "Portfólio interativo de André Santos, desenvolvedor Front-End. React, Next.js, TypeScript e AWS Certified Cloud Practitioner.",
   },
 };
 

@@ -1,4 +1,4 @@
-/** Layout da camada reveal — andre-real.png e mascara.png (571×1024). */
+/** Layout da camada reveal — andre-real.webp e mascara.webp (571×1024). */
 export const BASE_IMAGE_RATIO = 571 / 1024;
 export const REVEAL_IMAGE_RATIO = 571 / 1024;
 

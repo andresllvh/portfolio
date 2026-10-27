@@ -6,8 +6,8 @@ import HeroLines from "@/components/effects/HeroLines";
 import { PORTRAIT_FRAME_HEIGHT } from "@/lib/heroPortraitImage";
 import { useLanguage } from "@/components/LanguageProvider";
 
-const PORTRAIT_SRC = "/images/andre-real.png";
-const PORTRAIT_MASK_SRC = "/images/mascara.png";
+const PORTRAIT_SRC = "/images/andre-real.webp";
+const PORTRAIT_MASK_SRC = "/images/mascara.webp";
 
 const MONO: React.CSSProperties = {
   fontFamily: "'SF Mono', 'Courier New', monospace",

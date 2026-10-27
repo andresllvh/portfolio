@@ -26,7 +26,7 @@ type Localised = { pt: string; en: string };
 
 type Project = ProjectDetail & {
   align: "left" | "right";
-  section: "project1" | "project2" | "project3";
+  section: "project1" | "project2" | "project3" | "project4";
 };
 
 const projects: Project[] = [
@@ -81,12 +81,12 @@ const projects: Project[] = [
       "Git",
     ],
     desc: {
-      pt: "Projeto de gamificação de processos para a Polícia Militar da Paraíba, desenvolvido em colaboração com a DINTEL.",
-      en: "Process gamification project for the Military Police of Paraíba, developed in collaboration with DINTEL.",
+      pt: "Projeto confidencial de gamificação de processos para uma instituição pública, desenvolvido na Fábrica de Software UBTech/Unipê.",
+      en: "Confidential process gamification project for a public institution, developed at the UBTech/Unipê Software Factory.",
     },
     details: {
-      pt: "Projeto confidencial de gamificação de processos para instituição pública, desenvolvido durante o período de estágio na Fábrica de Software UBTech/Unipé. Interfaces responsivas e interativas com foco em experiência do usuário, trabalho em equipe multidisciplinar com levantamento de requisitos e regras de negócio. Gerou impacto social real para a Polícia Militar do estado da Paraíba.",
-      en: "Confidential process gamification project for a public institution, developed during an internship at the UBTech/Unipé Software Factory. Responsive and interactive interfaces focused on user experience, multidisciplinary teamwork involving requirements gathering and business rules. Generated real social impact for the Military Police of Paraíba.",
+      pt: "Projeto confidencial de gamificação de processos para instituição pública, desenvolvido durante o período de estágio na Fábrica de Software UBTech/Unipê. Interfaces responsivas e interativas com foco em experiência do usuário, trabalho em equipe multidisciplinar com levantamento de requisitos e regras de negócio.",
+      en: "Confidential process gamification project for a public institution, developed during an internship at the UBTech/Unipê Software Factory. Responsive and interactive interfaces focused on user experience, multidisciplinary teamwork involving requirements gathering and business rules.",
     },
     media: [],
     highlights: ["react", "javascript", "html5", "css"],
@@ -126,6 +126,40 @@ const projects: Project[] = [
     align: "left",
     section: "project3",
   },
+  {
+    num: "04",
+    name: {
+      pt: "CuboVision",
+      en: "CuboVision",
+    },
+    stack: [
+      "React",
+      "TypeScript",
+      "Three.js",
+      "Python",
+      "FastAPI",
+      "Vitest",
+      "pytest",
+    ],
+    desc: {
+      pt: "Resolve o Cubo Mágico 3×3: valida as cores informadas, calcula a solução e mostra cada giro em um cubo 3D animado.",
+      en: "Solves the 3×3 Rubik's Cube: validates the entered colors, computes the solution and shows each turn on an animated 3D cube.",
+    },
+    details: {
+      pt: "Aplicação web que valida o estado de um Cubo Mágico 3×3 (cores, peças, orientação e paridade) antes de resolver. A API em Python com FastAPI calcula a solução com o algoritmo de duas fases de Kociemba, geralmente em até 20 movimentos, e confere cada solução antes de devolvê-la.\n\nNo front-end, feito com React, TypeScript e Three.js, o usuário pinta as seis faces e segue a solução passo a passo, com um cubo 3D que executa cada giro. Testes com Vitest no front-end e pytest no back-end. Testado com um cubo físico, que terminou resolvido.",
+      en: "Web app that validates the state of a 3×3 Rubik's Cube (colors, pieces, orientation and parity) before solving it. The Python API built with FastAPI computes the solution with Kociemba's two-phase algorithm, usually in up to 20 moves, and verifies every solution before returning it.\n\nOn the front-end, built with React, TypeScript and Three.js, the user paints the six faces and follows the solution step by step on a 3D cube that performs each turn. Tested with Vitest on the front-end and pytest on the back-end. Tested with a physical cube, which ended up solved.",
+    },
+    url: "https://cubovision.vercel.app",
+    github: "https://github.com/andresllvh/cubovision",
+    media: [
+      "/projects/cubovision/02-solucao-3d.webp",
+      "/projects/cubovision/01-editor.webp",
+    ],
+    highlights: ["react", "typescript", "python"],
+    badge: { pt: "Open Source", en: "Open Source" },
+    align: "right",
+    section: "project4",
+  },
 ];
 
 const experiences: Array<{
@@ -139,10 +173,10 @@ const experiences: Array<{
 }> = [
   {
     role: {
-      pt: "Desenvolvedor Full Stack / Assistente de Processos e Automações",
-      en: "Full Stack Developer / Process & Automation Assistant",
+      pt: "Assistente de Automações | Desenvolvimento de Sistemas",
+      en: "Automation Assistant | Systems Development",
     },
-    company: "Bloco Construções S.A.",
+    company: "Bloco Construções",
     period: { pt: "Jun/2026 — Atual", en: "Jun/2026 — Present" },
     location: { pt: "João Pessoa, Brasil", en: "João Pessoa, Brazil" },
     summary: {
@@ -203,7 +237,7 @@ const experiences: Array<{
   },
   {
     role: { pt: "Desenvolvedor Frontend", en: "Frontend Developer" },
-    company: "Fábrica de Software UBTech/Unipé",
+    company: "Fábrica de Software UBTech/Unipê",
     period: { pt: "Out/2025 — Dez/2025", en: "Oct/2025 — Dec/2025" },
     location: { pt: "João Pessoa, Brasil", en: "João Pessoa, Brazil" },
     summary: {
