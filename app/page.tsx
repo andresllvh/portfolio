@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import HeroIntro from "@/components/HeroIntro";
-import FrozenKeyboard from "@/components/FrozenKeyboard";
+import KeyboardSkeleton from "@/components/KeyboardSkeleton";
 import SmoothScroll from "@/components/smooth-scroll";
 import SectionNav from "@/components/SectionNav";
 import ProjectModal from "@/components/ProjectModal";
@@ -14,7 +15,15 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { useReducedMotion } from "@/lib/useReducedMotion";
+import { useIdle } from "@/lib/useIdle";
 import type { Project } from "@/content/types";
+
+// three.js and the keyboard scene ship in their own chunk, loaded on the
+// client only, so they don't block the first render of the hero copy.
+const FrozenKeyboard = dynamic(() => import("@/components/FrozenKeyboard"), {
+  ssr: false,
+  loading: () => <KeyboardSkeleton />,
+});
 
 // Composition only: content lives in /content and each section renders its
 // own slice of it. This file owns the page-level state (3D keyboard
@@ -24,6 +33,7 @@ export default function Home() {
   const reduceMotion = useReducedMotion();
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [showKeyboard, setShowKeyboard] = useState(false);
+  const idle = useIdle();
 
   // Show the fixed 3D keyboard only once the sticky hero-intro photo has
   // fully scrolled past — otherwise it renders on top of the hero photo,
@@ -56,7 +66,7 @@ export default function Home() {
             {/* Desktop: persistent 3D scene fullscreen behind content. On
                 mobile the canvas lives inside the hero instead, so it scrolls
                 away and the rest of the page is clean, fast 2D. */}
-            {!isMobile && (
+            {!isMobile && idle && (
               <div
                 className="fixed inset-0 z-0 transition-opacity duration-300"
                 style={{
@@ -77,8 +87,8 @@ export default function Home() {
                   isMobile ? (
                     // Mobile-only 3D centerpiece; takes pointer events so
                     // keycaps are tappable.
-                    <div className="w-full h-[34vh] mt-12 -mb-4 pointer-events-auto">
-                      <FrozenKeyboard mobile />
+                    <div className="relative w-full h-[34vh] mt-12 -mb-4 pointer-events-auto">
+                      {idle ? <FrozenKeyboard mobile /> : <KeyboardSkeleton />}
                     </div>
                   ) : null
                 }

@@ -2,6 +2,7 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useReducedMotion } from "@/lib/useReducedMotion";
+import KeyboardSkeleton from "@/components/KeyboardSkeleton";
 import {
   Environment,
   Lightformer,
@@ -916,19 +917,7 @@ export default function FrozenKeyboard({
     </Canvas>
     {/* Phones see the keyboard right away, so a pulsing outline holds its
         place until the WebGL scene is ready. */}
-    {mobile && (
-      <div className="keyboard-skeleton" data-ready={ready} aria-hidden>
-        <div className="keyboard-skeleton__board">
-          {Array.from({ length: 15 }, (_, i) => (
-            <span
-              key={i}
-              className="keyboard-skeleton__key"
-              style={{ animationDelay: `${(i % 5) * 90}ms` }}
-            />
-          ))}
-        </div>
-      </div>
-    )}
+    {mobile && <KeyboardSkeleton ready={ready} />}
     </div>
   );
 }

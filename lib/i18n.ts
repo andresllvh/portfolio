@@ -127,6 +127,24 @@ export const DICT = {
       en: "© 2026 André Santos. All rights reserved.",
     },
   },
+  notFound: {
+    code: { pt: "Erro 404", en: "Error 404" },
+    title: { pt: "Página não encontrada", en: "Page not found" },
+    body: {
+      pt: "O endereço que você abriu não existe ou mudou de lugar.",
+      en: "The address you opened doesn't exist or has moved.",
+    },
+    back: { pt: "Voltar ao portfólio", en: "Back to the portfolio" },
+  },
+  error: {
+    title: { pt: "Algo deu errado", en: "Something went wrong" },
+    body: {
+      pt: "Um erro inesperado impediu a página de carregar. Tente de novo.",
+      en: "An unexpected error stopped the page from loading. Please try again.",
+    },
+    retry: { pt: "Tentar de novo", en: "Try again" },
+    back: { pt: "Voltar ao início", en: "Back to start" },
+  },
   keyboard: {
     taglines: {
       javascript: {

@@ -13,6 +13,9 @@ import SeasonProvider from "@/components/SeasonProvider";
 import LanguageProvider from "@/components/LanguageProvider";
 import { SEASONS, DEFAULT_SEASON, type SeasonId } from "@/lib/seasons";
 import { LANGUAGES, DEFAULT_LANG, type Lang } from "@/lib/i18n";
+import { Analytics } from "@vercel/analytics/next";
+import { profile } from "@/content/profile";
+import { personJsonLd } from "@/content/structured-data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +28,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portfolio-cmfb.vercel.app"),
+  metadataBase: new URL(profile.siteUrl),
   title: "André Santos — Desenvolvedor Front-End Jr",
   description:
     "Portfólio de André Santos, desenvolvedor Front-End Júnior especializado em React, TypeScript e Cloud Computing. AWS Certified Cloud Practitioner. João Pessoa, PB.",
@@ -74,7 +77,13 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <head />
+      <head>
+        <script
+          type="application/ld+json"
+          // JSON.stringify output is safe here: the data is static and ours.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }}
+        />
+      </head>
       <body
         className="min-h-full flex flex-col"
         suppressHydrationWarning
@@ -91,6 +100,7 @@ export default async function RootLayout({
             </div>
             <CustomCursor />
             <MagneticTargets />
+            <Analytics />
           </SeasonProvider>
         </LanguageProvider>
       </body>
