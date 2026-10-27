@@ -1,6 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import {
   Environment,
   Lightformer,
@@ -599,6 +600,13 @@ function Keyboard({ mobile }: { mobile: boolean }) {
   // decays to zero — produces a flip between project sections.
   const spinRef = useRef(0);
   const prevSectionId = useRef<string>("hero");
+  // With "reduce motion" on, the keyboard still follows the sections but
+  // skips the idle sway, the float and the flip between projects.
+  const reduceMotion = useReducedMotion();
+  const reduceMotionRef = useRef(reduceMotion);
+  useEffect(() => {
+    reduceMotionRef.current = reduceMotion;
+  }, [reduceMotion]);
 
   // When scrolling between two project sections, kick off a spin. Direction
   // alternates per target project so consecutive flips don't look identical.
@@ -606,7 +614,7 @@ function Keyboard({ mobile }: { mobile: boolean }) {
     if (mobile) return; // no project→project flips on mobile (hero-only)
     const prev = prevSectionId.current;
     prevSectionId.current = activeSection;
-    if (prev === activeSection) return;
+    if (prev === activeSection || reduceMotionRef.current) return;
     const wasProject = prev.startsWith("project");
     const isProject = activeSection.startsWith("project");
     if (!wasProject || !isProject) return;
@@ -663,9 +671,10 @@ function Keyboard({ mobile }: { mobile: boolean }) {
       mobile ||
       activeSectionRef.current === "hero" ||
       activeSectionRef.current === "contact";
-    const yawSwing = isShowcase ? 0.5 : 0.025;
-    const pitchSwing = isShowcase ? 0.07 : 0.0;
-    const rollSwing = isShowcase ? 0.05 : 0.0;
+    const still = reduceMotionRef.current;
+    const yawSwing = still ? 0 : isShowcase ? 0.5 : 0.025;
+    const pitchSwing = still ? 0 : isShowcase ? 0.07 : 0.0;
+    const rollSwing = still ? 0 : isShowcase ? 0.05 : 0.0;
     // Match the hero/start-screen timing across the 3D portfolio
     const period = 9; // seconds per full cycle (uniform)
     const w = (Math.PI * 2) / period;
@@ -675,7 +684,7 @@ function Keyboard({ mobile }: { mobile: boolean }) {
     ref.current.rotation.z = c.roll + Math.sin(t * w * 0.8) * rollSwing;
     ref.current.position.x = c.posX;
     ref.current.position.y =
-      c.posY + Math.sin(t * 0.6) * 0.04 + spinNorm * 0.35;
+      c.posY + (still ? 0 : Math.sin(t * 0.6) * 0.04) + spinNorm * 0.35;
     ref.current.position.z = c.posZ;
     ref.current.scale.setScalar(c.scale * (1 - spinNorm * 0.12));
   });
@@ -822,8 +831,12 @@ export default function FrozenKeyboard({
    * force it back off so hover/sound don't leak through. */
   interactive?: boolean;
 }) {
+  const [ready, setReady] = useState(false);
+
   return (
+    <div className="relative w-full h-full">
     <Canvas
+      onCreated={() => setReady(true)}
       // Portrait gets a pulled-back, centered, less top-down camera so the
       // keyboard reads as a front-facing hero centerpiece instead of the
       // off-axis desktop composition.
@@ -891,5 +904,21 @@ export default function FrozenKeyboard({
       <Keyboard mobile={mobile} />
 
     </Canvas>
+    {/* Phones see the keyboard right away, so a pulsing outline holds its
+        place until the WebGL scene is ready. */}
+    {mobile && (
+      <div className="keyboard-skeleton" data-ready={ready} aria-hidden>
+        <div className="keyboard-skeleton__board">
+          {Array.from({ length: 15 }, (_, i) => (
+            <span
+              key={i}
+              className="keyboard-skeleton__key"
+              style={{ animationDelay: `${(i % 5) * 90}ms` }}
+            />
+          ))}
+        </div>
+      </div>
+    )}
+    </div>
   );
 }

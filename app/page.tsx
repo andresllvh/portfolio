@@ -14,7 +14,8 @@ import ProjectModal, {
 } from "@/components/ProjectModal";
 import { useLanguage } from "@/components/LanguageProvider";
 import { useIsMobile } from "@/lib/useIsMobile";
-import { SKILLS_FLAT } from "@/lib/skills";
+import MobileSkillsGrid from "@/components/MobileSkillsGrid";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import type { Lang } from "@/lib/i18n";
 
 const EMAIL = "andrelaureano16@gmail.com";
@@ -313,7 +314,17 @@ function HeroWord({
 export default function Home() {
   const { t, lang } = useLanguage();
   const isMobile = useIsMobile();
+  const reduceMotion = useReducedMotion();
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [cvState, setCvState] = useState<"idle" | "opening" | "done">("idle");
+
+  // The PDF opens in a new tab, so the button itself confirms the action:
+  // "opening…" for a moment, then a check mark and a short toast.
+  const handleCvClick = () => {
+    setCvState("opening");
+    window.setTimeout(() => setCvState("done"), 600);
+    window.setTimeout(() => setCvState("idle"), 2600);
+  };
   const [showKeyboard, setShowKeyboard] = useState(false);
 
   // Show the fixed 3D keyboard only once the sticky hero-intro photo has
@@ -334,10 +345,13 @@ export default function Home() {
 
   return (
     <>
-      {/* Phones skip the scroll-driven photo intro and land straight on the
-          hero (name, role and CTAs). The CSS class hides it before hydration,
-          and the isMobile check keeps its WebGL canvas from mounting. */}
-      <div className="hidden md:block">{!isMobile && <HeroIntro />}</div>
+      {/* Phones and "reduce motion" users skip the scroll-driven photo intro
+          and land straight on the hero (name, role and CTAs). The CSS class
+          hides it before hydration, and the checks keep its WebGL canvas from
+          mounting. */}
+      <div className="hero-intro-wrap hidden md:block">
+        {!isMobile && !reduceMotion && <HeroIntro />}
+      </div>
       <div id="portfolio-3d">
       <SmoothScroll>
       <div className="relative">
@@ -390,6 +404,12 @@ export default function Home() {
         </header>
 
         <SectionNav />
+
+        {/* Lives outside the hero: its fade-in transform would otherwise
+            become the containing block of this fixed toast. */}
+        <div className="toast" data-show={cvState === "done"} role="status" aria-live="polite">
+          {t("hero.cvToast")}
+        </div>
 
         <main className="relative z-10 pointer-events-none">
           {/* Hero */}
@@ -449,13 +469,21 @@ export default function Home() {
                   rel="noopener noreferrer"
                   data-cursor="hover"
                   data-magnetic
-                  className="frost-btn frost-btn--primary"
+                  onClick={handleCvClick}
+                  data-state={cvState}
+                  className="frost-btn frost-btn--primary cv-btn"
                 >
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                    <path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z" />
-                    <path d="M14 3v5h5" />
-                  </svg>
-                  {t("hero.cv")}
+                  {cvState === "done" ? (
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                      <path d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                      <path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z" />
+                      <path d="M14 3v5h5" />
+                    </svg>
+                  )}
+                  {cvState === "opening" ? t("hero.cvOpening") : t("hero.cv")}
                 </a>
                 <button
                   type="button"
@@ -543,37 +571,7 @@ export default function Home() {
                 </Reveal>
               </div>
 
-              {/* Mobile skills grid (recovers the hover interaction as static
-                  content the keyboard can't surface on touch). */}
-              {isMobile && (
-                <div className="md:hidden mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 pointer-events-auto">
-                  {SKILLS_FLAT.map((s) => (
-                    <div
-                      key={s.slug}
-                      className="flex items-start gap-3 rounded-xl bg-ink-1/70 backdrop-blur-sm border border-ink-3 p-4"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="22"
-                        height="22"
-                        fill={`#${s.hex}`}
-                        className="flex-none mt-0.5"
-                        aria-hidden
-                      >
-                        <path d={s.path} />
-                      </svg>
-                      <div>
-                        <p className="text-ice-50 font-medium text-sm">
-                          {s.title}
-                        </p>
-                        <p className="text-ice-400 text-xs mt-0.5 leading-snug">
-                          {t(`keyboard.taglines.${s.slug}`)}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+              {isMobile && <MobileSkillsGrid />}
             </div>
           </section>
 

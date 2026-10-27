@@ -53,6 +53,11 @@ export const DICT = {
       en: "Specialised in React, TypeScript and Cloud Computing.",
     },
     cv: { pt: "Baixar CV", en: "Download CV" },
+    cvOpening: { pt: "Abrindo…", en: "Opening…" },
+    cvToast: {
+      pt: "Currículo aberto em uma nova aba",
+      en: "Resume opened in a new tab",
+    },
     hire: { pt: "Fale comigo", en: "Contact me" },
     scroll: { pt: "Role para explorar", en: "Scroll to explore" },
     keysHint: {
@@ -81,6 +86,10 @@ export const DICT = {
     hintMobile: {
       pt: "As ferramentas com as quais construo.",
       en: "The tools I build with.",
+    },
+    tapHint: {
+      pt: "Toque em uma tecnologia para ver como eu uso.",
+      en: "Tap a technology to see how I use it.",
     },
   },
   experience: {

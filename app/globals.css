@@ -234,6 +234,72 @@ body.header-hide-logo .site-header__brand .status-pill {
   .three-bg {
     display: none;
   }
+  /* No scroll-driven photo intro: the page opens on the hero. */
+  .hero-intro-wrap {
+    display: none !important;
+  }
+  /* Hero copy appears in place instead of sliding up. */
+  .fade-in-up {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .keyboard-skeleton__key {
+    animation: none;
+  }
+}
+
+/* ─── Mobile skills grid / CV button / keyboard skeleton ─────────────── */
+
+.skill-tile {
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.15s ease;
+}
+.skill-tile:active {
+  transform: scale(0.96);
+}
+
+.cv-btn[data-state="opening"] {
+  opacity: 0.85;
+  cursor: progress;
+}
+.cv-btn[data-state="done"] svg {
+  color: #4ade80;
+}
+
+/* Placeholder keyboard shown while the 3D scene compiles. */
+.keyboard-skeleton {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.keyboard-skeleton[data-ready="true"] {
+  opacity: 0;
+}
+.keyboard-skeleton__board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  padding: 10px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--ice-400) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ice-400) 22%, transparent);
+  transform: perspective(600px) rotateX(28deg);
+}
+.keyboard-skeleton__key {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--ice-100) 18%, transparent);
+  animation: keyboard-skeleton-pulse 1.4s ease-in-out infinite;
+}
+@keyframes keyboard-skeleton-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.9; }
 }
 
 ::selection {
