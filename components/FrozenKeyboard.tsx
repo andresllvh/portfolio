@@ -248,6 +248,17 @@ function createExtrudedBox(
   return geometry;
 }
 
+// Deterministic 0..1 value from a string (FNV-1a hash), used to give each
+// keycap its own animation rhythm without Math.random during render.
+function hash01(text: string, salt: number): number {
+  let h = 2166136261 ^ salt;
+  for (let i = 0; i < text.length; i++) {
+    h ^= text.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return (h >>> 0) / 4294967295;
+}
+
 // Render a simple-icons SVG path into a square CanvasTexture.
 function makeIconTexture(
   svgPath: string,
@@ -426,16 +437,16 @@ function Keycap({
   const matRef = useRef<THREE.MeshPhysicalMaterial>(null);
   const baseEmissive = 0.3;
 
-  // Each key gets its own random frequency + phase, stable across re-renders
-  // so every keycap's random bob feels independent (no synchronised wave).
-  // Sampled once at mount.
+  // Each key gets its own frequency + phase so every keycap's bob feels
+  // independent (no synchronised wave). Derived from the icon slug instead of
+  // Math.random so render stays pure and the values are stable.
   const randomBob = useMemo(
     () => ({
-      freq: 0.6 + Math.random() * 0.6, // 0.6..1.2 Hz-ish
-      phase: Math.random() * Math.PI * 2,
-      threshold: 0.45 + Math.random() * 0.2, // 0.45..0.65 — higher = rarer pop
+      freq: 0.6 + hash01(icon.slug, 1) * 0.6, // 0.6..1.2 Hz-ish
+      phase: hash01(icon.slug, 2) * Math.PI * 2,
+      threshold: 0.45 + hash01(icon.slug, 3) * 0.2, // 0.45..0.65 — higher = rarer pop
     }),
-    []
+    [icon.slug]
   );
 
   const iconTexture = useMemo(

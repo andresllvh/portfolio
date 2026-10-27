@@ -9,7 +9,6 @@ import {
 } from "react";
 import {
   DEFAULT_SEASON,
-  SEASONS,
   getPalette,
   type SeasonId,
   type SeasonPalette,

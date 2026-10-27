@@ -4,37 +4,15 @@ import { useEffect, useRef } from "react";
 import { useLenis } from "lenis/react";
 import { useLanguage } from "@/components/LanguageProvider";
 import Carousel from "@/components/Carousel";
-import type { Lang } from "@/lib/i18n";
+import { pick, type ProjectDetail } from "@/content/types";
 
-type Localised = { pt: string; en: string };
-
-export type ProjectDetail = {
-  num: string;
-  name: Localised;
-  // Main technologies — shown both on the card and in the modal. We kept a
-  // single canonical list so chips don't balloon inside the dialog.
-  stack: string[];
-  desc: Localised; // short card copy
-  details: Localised; // longer modal copy
-  url?: string;
-  github?: string;
-  badge?: Localised;
-  // simple-icons slugs from the 3D keyboard to light up + animate when
-  // this project's section is active.
-  highlights?: string[];
-  // Optional screenshot/preview URLs for the carousel. When missing the
-  // modal falls back to stylised placeholder slides.
-  media?: string[];
-};
+export type { ProjectDetail };
 
 type Props = {
   project: ProjectDetail | null;
   onClose: () => void;
 };
 
-function pick<T>(loc: { pt: T; en: T }, lang: Lang): T {
-  return loc[lang];
-}
 
 // Fullscreen modal that details a project. Closes on ESC, click outside,
 // and via the explicit close button. Stops Lenis while open (overflow:hidden

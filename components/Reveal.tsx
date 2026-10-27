@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  createElement,
   useEffect,
   useRef,
   type CSSProperties,
   type ElementType,
   type ReactNode,
+  type RefObject,
 } from "react";
 
 type Direction = "up" | "down" | "left" | "right" | "none";
@@ -80,13 +80,16 @@ export default function Reveal({
     ["--reveal-from" as string]: axis[direction],
   };
 
-  return createElement(
-    Tag,
-    {
-      ref,
-      className: `reveal ${className}`.trim(),
-      style,
-    },
-    children
+  // `as` accepts any element; typed as a div here so JSX can check the
+  // props we pass (ref, className, style), which every element supports.
+  const Component = Tag as "div";
+  return (
+    <Component
+      ref={ref as RefObject<HTMLDivElement>}
+      className={`reveal ${className}`.trim()}
+      style={style}
+    >
+      {children}
+    </Component>
   );
 }
