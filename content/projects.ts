@@ -132,4 +132,40 @@ export const projects: Project[] = [
     align: "right",
     section: "project4",
   },
+  {
+    num: "05",
+    name: {
+      pt: "Nexo Assist",
+      en: "Nexo Assist",
+    },
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Mastra",
+      "Gemini",
+      "SQLite / Turso",
+      "Tailwind CSS",
+      "Vitest",
+    ],
+    desc: {
+      pt: "Agent de IA que atende o service desk de TI num chat: consulta chamados, busca na central de ajuda, abre chamados com confirmação e chama um analista quando precisa, mostrando o que entendeu e por quê.",
+      en: "AI agent that handles an IT service desk in a chat: it checks tickets, searches the help center, opens tickets after confirmation and calls an analyst when needed, showing what it understood and why.",
+    },
+    details: {
+      pt: "Desafio técnico do processo seletivo da Beyond the Bytes. O funcionário descreve o problema com as próprias palavras e o agent decide a ação a cada mensagem. Uma etapa de entendimento registra a intenção, a confiança e o motivo, e o painel \"Como decidi\" mostra cada passo com entrada, resultado e tempo. Do outro lado, um console permite ao analista assumir a conversa, responder e devolvê-la ao agent.\n\nAs regras do service desk ficam no código, não só no prompt: prioridade e prazo em horas úteis, checagem de duplicidade, confirmação antes de criar e privacidade entre funcionários. O sistema de chamados legado é simulado com falhas e novas tentativas. Next.js, TypeScript estrito, Mastra com Gemini, SQLite/Turso, 34 testes com Vitest, uma avaliação das decisões do agent e deploy na Vercel com limite de uso.",
+      en: "Technical challenge from the Beyond the Bytes hiring process. Employees describe the problem in their own words and the agent decides the action for each message. An understanding step records the intent, confidence and reason, and the \"How I decided\" panel shows every step with input, result and timing. On the other side, a console lets analysts take over the conversation, reply and hand it back to the agent.\n\nThe service desk rules live in code, not only in the prompt: priority and business-hour deadlines, duplicate checks, confirmation before creating tickets and privacy between employees. The legacy ticket system is simulated with failures and retries. Next.js, strict TypeScript, Mastra with Gemini, SQLite/Turso, 34 Vitest tests, an evaluation of the agent's decisions and a Vercel deploy with usage limits.",
+    },
+    url: "https://nexo-assist-snowy.vercel.app",
+    github: "https://github.com/andresllvh/nexo-assist",
+    media: [
+      "/projects/nexo-assist/01-como-decidi.webp",
+      "/projects/nexo-assist/02-rascunho-confirmado.webp",
+      "/projects/nexo-assist/03-console-analista.webp",
+      "/projects/nexo-assist/04-login.webp",
+    ],
+    highlights: ["nextdotjs", "typescript", "vitest"],
+    badge: { pt: "Open Source", en: "Open Source" },
+    align: "left",
+    section: "project5",
+  },
 ];

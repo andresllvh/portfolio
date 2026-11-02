@@ -20,6 +20,7 @@ export default function SectionNav() {
     { id: "project2", label: `${t("nav.project")} 02` },
     { id: "project3", label: `${t("nav.project")} 03` },
     { id: "project4", label: `${t("nav.project")} 04` },
+    { id: "project5", label: `${t("nav.project")} 05` },
     { id: "contact", label: t("nav.contact") },
   ];
 
@@ -32,6 +33,7 @@ export default function SectionNav() {
       "project2",
       "project3",
       "project4",
+      "project5",
       "contact",
     ];
     const els = ids.map((id) =>

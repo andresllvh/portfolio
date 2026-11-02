@@ -8,7 +8,7 @@ export function pick<T>(loc: { pt: T; en: T }, lang: Lang): T {
   return loc[lang];
 }
 
-export type ProjectSection = "project1" | "project2" | "project3" | "project4";
+export type ProjectSection = "project1" | "project2" | "project3" | "project4" | "project5";
 
 export type ProjectDetail = {
   num: string;

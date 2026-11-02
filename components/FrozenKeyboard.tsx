@@ -98,6 +98,16 @@ const SECTION_STATES: Record<string, KeyboardState> = {
     posZ: 0,
     scale: 0.85,
   },
+  // Project 5 — left-aligned, keyboard right.
+  project5: {
+    yaw: 0,
+    pitch: 0.7,
+    roll: 0.2,
+    posX: 1.5,
+    posY: 0.2,
+    posZ: 0,
+    scale: 0.85,
+  },
   experience: {
     yaw: Math.PI * 0.3,
     pitch: Math.PI * 0.08,
